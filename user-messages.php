@@ -6,6 +6,10 @@
 	if(!isset($_SESSION['freelancer'])){
 		header("Location: index.php");
 	}
+	
+	$email = $_SESSION['freelancer'];
+	$sql = mysqli_query($conn, "SELECT * FROM `freelancer` WHERE `email` = '$email'");
+	$fetch = mysqli_fetch_assoc($sql);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -103,9 +107,6 @@
 						$user = mysqli_query($conn, "SELECT client.*, messages.sender_id FROM `client` LEFT JOIN messages ON client.id = messages.sender_id AND client.id WHERE client.id = messages.sender_id");
 						if(mysqli_num_rows($user) > 0){
 							while($row = mysqli_fetch_assoc($user)){
-								//$i = $row['id'];
-								//$dd = mysqli_query($conn, "SELECT * FROM `messages` WHERE `sender_id` = '$i'");
-								//if(mysqli_num_rows($dd) > 0){
 					?>
 						<button onclick="show(this)" data-show="<?php echo $row['id'];?>" class="conversation active w-full">
 							<img src="public/assets/client/<?php echo $row['profile_p'];?>" class="avatar">
@@ -135,9 +136,9 @@
 				<div id="me_box" class="flex-1 p-6 space-y-4 overflow-y-auto"></div>
 	
 				<!-- INPUT -->
-				<div class="border-t border-slate-800 p-4 flex gap-2">
+				<div class="fixed bottom-0 w-[960px] border border-slate-800 p-4 flex gap-2">
 					<input type="text" id="message" class="chat-input" placeholder="Type a message...">
-					<button onclick="send()" class="btn-primary">Send</button>
+					<button data-sender="<?php echo $fetch['id'];?>" onclick="send(this)" class="btn-primary">Send</button>
 				</div>
 	
 			</div>

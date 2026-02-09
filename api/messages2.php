@@ -19,13 +19,13 @@
 	$freelancer = $_SESSION['freelancer'];
 	
 	if(isset($data['reciver_id']) && isset($data['message']) && isset($data['type'])){
-		$reciever = $data['reciver_id'];
+		$sender = $data['reciver_id'];
 		$message = $data['message'];
 		$type = $data['type'];
 		
 		$re = mysqli_query($conn, "SELECT * FROM `client` WHERE `email` = '$client'");
 		$d = mysqli_fetch_assoc($re);
-		$sender = $d['id'];
+		$reciever = $d['id'];
 		
 		$sql = mysqli_query($conn, "INSERT INTO `messages`(`sender_id`, `reciever_id`, `message`, `sender_type`) VALUES('$sender', '$reciever', '$message', '$type')");
 		

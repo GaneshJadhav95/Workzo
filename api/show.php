@@ -1,7 +1,7 @@
 <?php
 	require_once"../authorization/config.php";
 	session_start();
-	header('Comtent-Type: application/json');
+	header('Content-Type: application/json');
 	$json_input = file_get_contents('php://input');
 	$data = json_decode($json_input, true);
 	
@@ -22,13 +22,17 @@
 		$data = mysqli_fetch_assoc($sql);
 		
 		$message = mysqli_query($conn, "SELECT * FROM `messages` WHERE `sender_id` = '$show' AND `sender_type` = 'Client'");
-		$data2 = mysqli_fetch_assoc($message);
+		$data2 = mysqli_fetch_all($message, MYSQLI_ASSOC);
+		
+		$message2 = mysqli_query($conn, "SELECT * FROM `messages` WHERE `reciever_id` = '$show' AND `sender_type` = 'Freelancer'");
+		$data3 = mysqli_fetch_all($message2, MYSQLI_ASSOC);
 		
 		if($sql){
 			echo json_encode([
 				"status" => "success",
 				"data" => $data,
-				"message" => $data2
+				"message" => $data2,
+				"message2" => $data3
 			]);
 		}
 		exit;

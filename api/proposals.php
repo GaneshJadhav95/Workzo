@@ -22,10 +22,11 @@
 	$id = $r['freelancer_id'];
 	$sql = mysqli_query($conn, "SELECT * FROM `freelancer` WHERE `id` = '$id'");
 	$data = mysqli_fetch_assoc($sql);
-	
-	echo json_encode([
-		"status" => "success",
-		"data" => $data
-	]);
+	if($sql){
+		echo json_encode([
+			"status" => "success",
+			"data" => $data
+		]);
+	}
 	exit;
 ?>
