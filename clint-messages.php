@@ -6,6 +6,10 @@
 	if(!isset($_SESSION['client'])){
 		header("Location: index.php");
 	}	
+	
+	$email = $_SESSION['client'];
+	$sql = mysqli_query($conn, "SELECT * FROM `client` WHERE `email` = '$email'");
+	$fetch = mysqli_fetch_assoc($sql);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -99,50 +103,42 @@
 				</div>
 	
 				<div class="divide-y divide-slate-800">
-					<div class="conversation active">
-						<img src="" class="avatar">
-						<div>
-							<p class="font-medium text-white">Ashish</p>
-							<p class="text-xs text-slate-400 truncate">
-								Can we discuss the timeline?
-							</p>
-						</div>
-					</div>
+					<?php					
+						$user = mysqli_query($conn, "SELECT DISTINCT freelancer.id, freelancer.*, messages.reciever_id FROM `freelancer` LEFT JOIN messages ON freelancer.id = messages.reciever_id AND freelancer.id WHERE freelancer.id = messages.reciever_id");
+						if(mysqli_num_rows($user) > 0){
+							while($row = mysqli_fetch_assoc($user)){
+					?>
+						<button onclick="show2(this)" data-show="<?php echo $row['id'];?>" class="conversation active w-full">
+							<img src="public/assets/freelancer/<?php echo $row['profile_p'];?>" class="avatar">
+							<div>
+								<p class="font-medium text-white"><?php echo $row['name'];?></p>
+							</div>
+						</button>
+					<?php
+							}
+						}
+					?>
 				</div>
 			</div>
 	
 			<!-- CHAT WINDOW -->
-			<div class="flex flex-col flex-1">
+			<div class="flex flex-col flex-1 hidden" id="sh">
 	
 				<!-- CHAT HEADER -->
 				<div class="border-b border-slate-800 p-4 flex items-center gap-3">
-					<img src="" class="w-10 h-10 rounded-full">
+					<img src="" id="im" class="w-10 h-10 rounded-full">
 					<div>
-						<p class="font-semibold text-white">Ashish</p>
+						<p id="name" class="font-semibold text-white"></p>
 					</div>
 				</div>
 	
 				<!-- MESSAGES -->
-				<div class="flex-1 p-6 space-y-4 overflow-y-auto">
-	
-					<div class="message received">
-						Hi, can we discuss the project timeline?
-					</div>
-	
-					<div class="message sent">
-						Sure, I’d like to finish it within 3 weeks.
-					</div>
-	
-					<div class="message received">
-						That works for me 👍
-					</div>
-	
-				</div>
+				<div id="me_box" class="flex-1 p-6 space-y-4 overflow-y-auto"></div>
 	
 				<!-- INPUT -->
-				<div class="border-t border-slate-800 p-4 flex gap-2">
+				<div class="border-t fixed bottom-0 w-[62.5%] border-slate-800 p-4 flex gap-2">
 					<input type="text" class="chat-input" id="message" placeholder="Type a message...">
-					<button class="btn-primary">Send</button>
+					<button data-sender="<?php echo $fetch['id'];?>" onclick="client(this)" class="btn-primary">Send</button>
 				</div>
 	
 			</div>

@@ -5,7 +5,7 @@
 	$json_input = file_get_contents('php://input');
 	$data = json_decode($json_input, true);
 	
-	if(!isset($_SESSION['freelancer'])){
+	if(!isset($_SESSION['client'])){
 		echo json_encode(
 			[
 				"status" => "error",
@@ -18,13 +18,13 @@
 	if(isset($data['show'])){
 		$show = $data['show'];
 		
-		$sql = mysqli_query($conn, "SELECT * FROM `client` WHERE `id` = '$show'");
+		$sql = mysqli_query($conn, "SELECT * FROM `freelancer` WHERE `id` = '$show'");
 		$data = mysqli_fetch_assoc($sql);
 		
-		$message = mysqli_query($conn, "SELECT * FROM `messages` WHERE `sender_id` = '$show' AND `sender_type` = 'Client' ORDER BY created_at");
+		$message = mysqli_query($conn, "SELECT * FROM `messages` WHERE `reciever_id` = '$show' AND `sender_type` = 'Client' ORDER BY created_at");
 		$data2 = mysqli_fetch_all($message, MYSQLI_ASSOC);
 		
-		$message2 = mysqli_query($conn, "SELECT * FROM `messages` WHERE `reciever_id` = '$show' AND `sender_type` = 'Freelancer' ORDER BY created_at");
+		$message2 = mysqli_query($conn, "SELECT * FROM `messages` WHERE `sender_id` = '$show' AND `sender_type` = 'Freelancer' ORDER BY created_at");
 		$data3 = mysqli_fetch_all($message2, MYSQLI_ASSOC);
 		
 		if($sql){
