@@ -18,21 +18,17 @@
 	if(isset($data['show'])){
 		$show = $data['show'];
 		
-		$sql = mysqli_query($conn, "SELECT * FROM `client` WHERE `id` = '$show'");
+		$sql = mysqli_query($conn, "SELECT * FROM `client`");
 		$data = mysqli_fetch_assoc($sql);
 		
-		$message = mysqli_query($conn, "SELECT * FROM `messages` WHERE `sender_id` = '$show' AND `sender_type` = 'Client' ORDER BY created_at");
+		$message = mysqli_query($conn, "SELECT * FROM `messages` WHERE `message_id` = '$show' ORDER BY created_at");
 		$data2 = mysqli_fetch_all($message, MYSQLI_ASSOC);
-		
-		$message2 = mysqli_query($conn, "SELECT * FROM `messages` WHERE `reciever_id` = '$show' AND `sender_type` = 'Freelancer' ORDER BY created_at");
-		$data3 = mysqli_fetch_all($message2, MYSQLI_ASSOC);
 		
 		if($sql){
 			echo json_encode([
 				"status" => "success",
 				"data" => $data,
-				"message" => $data2,
-				"message2" => $data3
+				"message" => $data2
 			]);
 		}
 		exit;

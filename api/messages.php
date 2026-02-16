@@ -27,7 +27,9 @@
 		$d = mysqli_fetch_assoc($re);
 		$sender = $d['id'];
 		
-		$sql = mysqli_query($conn, "INSERT INTO `messages`(`sender_id`, `reciever_id`, `message`, `sender_type`) VALUES('$sender', '$reciever', '$message', '$type')");
+		$message_id = $sender . $reciever;
+		
+		$sql = mysqli_query($conn, "INSERT INTO `messages`(`sender_id`, `reciever_id`, `message_id`, `message`, `sender_type`) VALUES('$sender', '$reciever', '$message_id', '$message', '$type')");
 		
 		if($sql){
 			echo json_encode([

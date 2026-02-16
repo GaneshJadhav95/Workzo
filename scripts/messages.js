@@ -41,7 +41,7 @@ async function show(btn) {
 		});
 
 		const result = await response.json();
-
+		
 		if (result.status === "success") {
 			document.getElementById("sh").style.display = "block";
 			document.getElementById("name").innerHTML = result.data.name;
@@ -50,23 +50,21 @@ async function show(btn) {
 			meBox.innerHTML = ""; 
 			console.log(result);
 
-			for (let i = 0; i <= result.message2.length; i++) {
-				const received = result.message?.[i]?.message ?? "";
-			
-				meBox.insertAdjacentHTML("beforeend", `
-					${received ? `<div class="message received">${received}</div>` : ""}
-				`);
-			}
-							
-			for (let i = 0; i <= result.message.length; i++) {
-				const sent = result.message2[i]?.message ?? "";
-			
-				meBox.insertAdjacentHTML("beforeend", `
-					${sent ? `<div class="message sent">${sent}</div>` : ""}
-				`);
+			for (let i = 0; i < result.message.length; i++) {
+				const message = result.message?.[i]?.message ?? "";
+				
+				if(result.message[i].sender_type === "Client"){
+					meBox.insertAdjacentHTML("beforeend", `
+						${message ? `<div class="message received float-left w-full">${message}</div>` : ""}
+					`);
+				}else{
+					meBox.insertAdjacentHTML("beforeend", `
+						${message ? `<div class="message sent float-right w-full">${message}</div>` : ""}
+					`);
+				}
 			}
 
-			document.getElementById("im").src =
+			document.getElementById("im").src = 
 				`public/assets/client/${result.data.profile_p}`;
 		} else {
 			console.log(result);
@@ -136,6 +134,14 @@ async function client(btn){
 		console.log(error);
 	}
 }
+//const c = document.getElementById('c');
+//c.addEventListener("keydown", function (event) {
+//	let key = event.key;
+//	
+//	if(key === "Enter"){
+//		client(event,btn);
+//	}
+//});
 
 async function show2(btn) {
 	try {
@@ -156,22 +162,18 @@ async function show2(btn) {
 			const meBox = document.getElementById("me_box");
 			meBox.innerHTML = ""; 
 			
-			for (let i = 0; i <= result.message.length; i++) {
-				const received = result.message?.[i]?.message ?? "";
-				//const sent = result.message2[i]?.message ?? "";
-			
-				meBox.insertAdjacentHTML("beforeend", `
-					${received ? `<div class="message sent">${received}</div>` : ""}
-				`);
-			}
-			
-			for (let i = 0; i <= result.message2.length; i++) {
-				const sent = result.message2[i]?.message ?? "";
-			
-				meBox.insertAdjacentHTML("beforeend", `
-					
-					${sent ? `<div class="message received">${sent}</div>` : ""}
-				`);
+			for (let i = 0; i < result.message.length; i++) {
+				const message = result.message?.[i]?.message ?? "";
+				
+				if(result.message[i].sender_type === "Freelancer"){
+					meBox.insertAdjacentHTML("beforeend", `
+						${message ? `<div class="message received w-full float-left">${message}</div>` : ""}
+					`);
+				}else{
+					meBox.insertAdjacentHTML("beforeend", `
+						${message ? `<div class="message sent float-right w-full">${message}</div>` : ""}
+					`);
+				}
 			}
 			
 			document.getElementById("im").src =

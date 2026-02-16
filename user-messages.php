@@ -104,11 +104,12 @@
 	
 				<div class="divide-y divide-slate-800">
 					<?php					
-						$user = mysqli_query($conn, "SELECT DISTINCT client.id, client.*, messages.sender_id FROM `client` LEFT JOIN messages ON client.id = messages.sender_id AND client.id WHERE client.id = messages.sender_id");
+						$user = mysqli_query($conn, "SELECT DISTINCT client.id, client.*, messages.sender_id, messages.message_id FROM `client` LEFT JOIN messages ON client.id = messages.sender_id AND client.id WHERE client.id = messages.sender_id");
 						if(mysqli_num_rows($user) > 0){
 							while($row = mysqli_fetch_assoc($user)){
+						//print_r($row);
 					?>
-						<button onclick="show(this)" data-show="<?php echo $row['id'];?>" class="conversation active w-full">
+						<button onclick="show(this)" data-show="<?php echo $row['message_id'];?>" class="conversation active w-full">
 							<img src="public/assets/client/<?php echo $row['profile_p'];?>" class="avatar">
 							<div>
 								<p class="font-medium text-white"><?php echo $row['name'];?></p>

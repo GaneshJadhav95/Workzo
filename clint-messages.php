@@ -104,11 +104,11 @@
 	
 				<div class="divide-y divide-slate-800">
 					<?php					
-						$user = mysqli_query($conn, "SELECT DISTINCT freelancer.id, freelancer.*, messages.reciever_id FROM `freelancer` LEFT JOIN messages ON freelancer.id = messages.reciever_id AND freelancer.id WHERE freelancer.id = messages.reciever_id");
+						$user = mysqli_query($conn, "SELECT DISTINCT freelancer.id, freelancer.*, messages.reciever_id, messages.message_id FROM `freelancer` LEFT JOIN messages ON freelancer.id = messages.reciever_id AND freelancer.id WHERE freelancer.id = messages.reciever_id");
 						if(mysqli_num_rows($user) > 0){
 							while($row = mysqli_fetch_assoc($user)){
 					?>
-						<button onclick="show2(this)" data-show="<?php echo $row['id'];?>" class="conversation active w-full">
+						<button onclick="show2(this)" data-show="<?php echo $row['message_id'];?>" class="conversation active w-full">
 							<img src="public/assets/freelancer/<?php echo $row['profile_p'];?>" class="avatar">
 							<div>
 								<p class="font-medium text-white"><?php echo $row['name'];?></p>
@@ -138,7 +138,7 @@
 				<!-- INPUT -->
 				<div class="border-t fixed bottom-0 w-[62.5%] border-slate-800 p-4 flex gap-2">
 					<input type="text" class="chat-input" id="message" placeholder="Type a message...">
-					<button data-sender="<?php echo $fetch['id'];?>" onclick="client(this)" class="btn-primary">Send</button>
+					<button id="c" data-sender="<?php echo $fetch['id'];?>" onclick="client(this)" class="btn-primary">Send</button>
 				</div>
 	
 			</div>
