@@ -109,7 +109,7 @@
 							while($row = mysqli_fetch_assoc($user)){
 						//print_r($row);
 					?>
-						<button onclick="show(this)" data-show="<?php echo $row['message_id'];?>" class="conversation active w-full">
+						<button onclick="show1(<?php echo $row['message_id'];?>), setInterval(ajit2, 1000);" data-show="<?php echo $row['message_id'];?>" class="conversation active w-full">
 							<img src="public/assets/client/<?php echo $row['profile_p'];?>" class="avatar">
 							<div>
 								<p class="font-medium text-white"><?php echo $row['name'];?></p>
@@ -138,13 +138,73 @@
 	
 				<!-- INPUT -->
 				<div class="border-t fixed bottom-0 w-[62.5%] border-slate-800 p-4 flex gap-2">
-					<input type="text" id="message" class="chat-input" placeholder="Type a message...">
-					<button data-sender="<?php echo $fetch['id'];?>" onclick="send(this)" class="btn-primary">Send</button>
+					<input type="text" data-sender="<?php echo $fetch['id'];?>" id="message" class="chat-input" placeholder="Type a message...">
 				</div>
 	
 			</div>
 	
 		</div>
 		<script src="scripts/messages.js"></script>
+		<script>
+			async function send(sender) {
+				try {
+					const input = document.getElementById("message");
+					let message = input.value.trim();
+					if (!message) return;
+			
+					const response = await fetch("api/messages2.php", {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json"
+						},
+						body: JSON.stringify({
+							reciver_id: sender,
+							message: message,
+							type: "Freelancer"
+						})
+					});
+			
+					const result = await response.json();
+			
+					if (result.status === "success") {
+						const meBox = document.getElementById("me_box");
+						meBox.innerHTML = "";
+			
+						result.message.forEach(item => {
+							const msgText = item?.message ?? "";
+			
+							if (!msgText) return;
+			
+							const messageHTML =
+								item.sender_type === "Client"
+									? `<div class="message received">${msgText}</div>`
+									: `<div class="message sent">${msgText}</div>`;
+			
+							meBox.insertAdjacentHTML("beforeend", messageHTML);
+						});
+			
+						input.value = "";
+					} else {
+						console.log(result);
+					}
+			
+				} catch (error) {
+					console.error(error);
+				}
+			}
+			
+			//function startPolling() { 
+			//	setInterval(send, 1000);
+			//	console.log("ok")
+			//}
+			
+			document.getElementById("message").addEventListener("keydown", function (event) {
+				if (event.key === "Enter") {
+					let sender = this.dataset.sender;
+					send(sender);
+				}
+			});	
+			//startPolling();
+		</script>
 	</body>
 </html>

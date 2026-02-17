@@ -28,15 +28,25 @@
 		$reciever = $d['id'];
 		
 		$message_id = $reciever . $sender;
-		
-		$sql = mysqli_query($conn, "INSERT INTO `messages`(`sender_id`, `reciever_id`, `message_id`, `message`, `sender_type`) VALUES('$sender', '$reciever', '$message_id ', '$message', '$type')");
-		
-		if($sql){
+				
+		if($message === ""){
 			echo json_encode([
-				"status" => "success",
-				"message" => "ok"
+				"status" => "unsuccess",
+				"message" => "sorry"
 			]);
+		}else{
+			$sql = mysqli_query($conn, "INSERT INTO `messages`(`sender_id`, `reciever_id`, `message_id`, `message`, `sender_type`) VALUES('$sender', '$reciever', '$message_id', '$message', '$type')");
+
+			if($sql){
+				$message = mysqli_query($conn, "SELECT * FROM `messages` WHERE `message_id` = '$message_id' ORDER BY created_at");
+				$data = mysqli_fetch_all($message, MYSQLI_ASSOC);
+				
+				echo json_encode([
+					"status" => "success",
+					"message" => $data
+				]);
+			}
+			exit;
 		}
-		exit;
 	}
 ?>

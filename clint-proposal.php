@@ -62,7 +62,39 @@
 				font-size: .85rem;
 			}
 		</style>
-		<script src="scripts/messages.js"></script>
+				<script>
+			async function m(btn){
+				try{
+					let reciver_id = btn.dataset.reciver;
+					let message = "Hi";
+					let type = "Client";
+					
+					const url = await fetch(`api/messages.php`, {
+						method: "POST",
+						headers: {
+							'Content-type' : 'application/json'
+						},
+						body: JSON.stringify({
+							reciver_id: reciver_id,
+							message: message,
+							type: type
+						})
+					});
+					
+					const result = await url.json();
+					if(result.status == "success"){
+						document.getElementById("ab" + reciver_id).innerHTML = "Sent";
+						document.getElementById("ab" + reciver_id).disabled = true;
+						console.log(result);
+					}else{
+						console.log(result);
+					}
+					
+				} catch(error){
+					console.log(error);
+				}
+			}
+		</script>
 	</head>
 	
 	<body class="bg-[#0F172A] text-slate-200 min-h-screen flex">

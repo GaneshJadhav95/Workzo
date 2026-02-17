@@ -1,43 +1,16 @@
-async function m(btn){
-	try{
-		let reciver_id = btn.dataset.reciver;
-		let message = "Hi";
-		let type = "Client";
-		
-		const url = await fetch(`api/messages.php`, {
-			method: "POST",
-			headers: {
-				'Content-type' : 'application/json'
-			},
-			body: JSON.stringify({
-				reciver_id: reciver_id,
-				message: message,
-				type: type
-			})
-		});
-		
-		const result = await url.json();
-		if(result.status == "success"){
-			document.getElementById("ab" + reciver_id).innerHTML = "Sent";
-			document.getElementById("ab" + reciver_id).disabled = true;
-			console.log(result);
-		}else{
-			console.log(result);
-		}
-		
-	} catch(error){
-		console.log(error);
-	}
+let show3 = 0;
+function ajit2(){
+	show1(show3);
+	console.log("ok");
 }
-
-async function show(btn) {
+async function show1(btn) {
 	try {
-		const show = btn.dataset.show;
-
+		//const show = btn.dataset.show;
+		show3 = btn;
 		const response = await fetch("api/show.php", {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({ show })
+			body: JSON.stringify({ show: show3 })
 		});
 
 		const result = await response.json();
@@ -55,11 +28,11 @@ async function show(btn) {
 				
 				if(result.message[i].sender_type === "Client"){
 					meBox.insertAdjacentHTML("beforeend", `
-						${message ? `<div class="message received float-left w-full">${message}</div>` : ""}
+						${message ? `<div class="message received">${message}</div>` : ""}
 					`);
 				}else{
 					meBox.insertAdjacentHTML("beforeend", `
-						${message ? `<div class="message sent float-right w-full">${message}</div>` : ""}
+						${message ? `<div class="message sent">${message}</div>` : ""}
 					`);
 				}
 			}
@@ -74,79 +47,18 @@ async function show(btn) {
 	}
 }
 
-async function send(btn){
-	try{
-		let sender = btn.dataset.sender;
-		let message = document.getElementById("message").value;
-		let type = "Freelancer";
-		
-		const url = await fetch(`api/messages2.php`, {
-			method: "POST",
-			headers: {
-				'Content-type' : 'application/json'
-			},
-			body: JSON.stringify({
-				reciver_id: sender,
-				message: message,
-				type: type
-			})
-		});
-		
-		const result = await url.json();
-		if(result.status == "success"){
-			console.log(result);
-			document.getElementById("me_box").innerHTML += `<div class="message sent">${message}</div>`;
-		}else{
-			console.log(result);
-		}
-	} catch(error){
-		console.log(error);
-	}
+let show = 0;
+function ajit(){
+	
+	show2(show);
+	console.log("ok");
 }
 
-
-async function client(btn){
-	try{
-		let sender = btn.dataset.sender;
-		let message = document.getElementById("message").value;
-		let type = "Client";
-		
-		const url = await fetch(`api/messages3.php`, {
-			method: "POST",
-			headers: {
-				'Content-type' : 'application/json'
-			},
-			body: JSON.stringify({
-				reciver_id: sender,
-				message: message,
-				type: type
-			})
-		});
-		
-		const result = await url.json();
-		if(result.status == "success"){
-			console.log(result);
-			document.getElementById("me_box").innerHTML += `<div class="message sent">${message}</div>`;
-		}else{
-			console.log(result);
-		}
-	} catch(error){
-		console.log(error);
-	}
-}
-//const c = document.getElementById('c');
-//c.addEventListener("keydown", function (event) {
-//	let key = event.key;
-//	
-//	if(key === "Enter"){
-//		client(event,btn);
-//	}
-//});
 
 async function show2(btn) {
 	try {
-		const show = btn.dataset.show;
-
+		//const show = btn.dataset.show;
+		show = btn;
 		const response = await fetch("api/show2.php", {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
@@ -154,7 +66,9 @@ async function show2(btn) {
 		});
 
 		const result = await response.json();
-
+		
+		
+		
 		if (result.status === "success") {
 			document.getElementById("sh").style.display = "block";
 			document.getElementById("name").innerHTML = result.data.name;
@@ -167,11 +81,11 @@ async function show2(btn) {
 				
 				if(result.message[i].sender_type === "Freelancer"){
 					meBox.insertAdjacentHTML("beforeend", `
-						${message ? `<div class="message received w-full float-left">${message}</div>` : ""}
+						${message ? `<div class="message received">${message}</div>` : ""}
 					`);
 				}else{
 					meBox.insertAdjacentHTML("beforeend", `
-						${message ? `<div class="message sent float-right w-full">${message}</div>` : ""}
+						${message ? `<div class="message sent">${message}</div>` : ""}
 					`);
 				}
 			}
@@ -185,5 +99,6 @@ async function show2(btn) {
 		console.error(error);
 	}
 }
+
 
 console.log("Loaded Messages JS");
