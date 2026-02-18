@@ -83,7 +83,7 @@
 					</div>
 				</div>
 	
-				<!-- Work History -->
+				<!-- Work History 
 				<div class="bg-[#020617] rounded-2xl p-6">
 					<h3 class="text-lg font-semibold text-white mb-4">Work History</h3>
 	
@@ -112,20 +112,20 @@
 							</span>
 						</div>
 					</div>
-				</div>
+				</div>-->
 	
 			</div>
 	
 			<!-- RIGHT SIDEBAR -->
 			<div class="space-y-6">
 	
-				<!-- Hire Card -->
+				<!-- Hire Card 
 				<div class="bg-[#020617] rounded-2xl p-6">
 					<button class="w-full bg-green-500 hover:bg-green-600 text-[#052E16]
 						font-semibold py-3 rounded-full">
 						Message
 					</button>
-				</div>
+				</div>-->
 	
 				<!-- Profile Details -->
 				<div class="bg-[#020617] rounded-2xl p-6 space-y-3 text-sm">

@@ -99,19 +99,19 @@
 				Workzo
 			</a>
 	
-			<!-- DESKTOP LINKS -->
+			<!-- DESKTOP LINKS 
 			<div class="hidden md:flex items-center gap-8 text-sm text-slate-300">
 				<a href="about.php" class="hover:text-white transition">About Us</a>
-			</div>
+			</div>-->
 	
-			<!-- SEARCH -->
+			<!-- SEARCH 
 			<div class="hidden lg:block">
 				<input type="text"
 					placeholder="Search jobs or freelancers"
 					class="bg-[#020617] border border-slate-700 rounded-full
 					px-5 py-2 text-sm w-80 text-slate-200
 					focus:outline-none focus:ring-2 focus:ring-green-500">
-			</div>
+			</div>-->
 	
 			<!-- RIGHT ACTIONS -->
 			<div class="flex items-center gap-4 relative">

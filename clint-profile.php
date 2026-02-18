@@ -130,13 +130,13 @@
 					</ul>
 				</div>
 	
-				<!-- ACTION -->
+				<!-- ACTION 
 				<div class="bg-[#020617] border border-slate-800 rounded-2xl p-6 text-center">
 					<button class="bg-green-500 hover:bg-green-600
 						text-[#052E16] px-6 py-2 rounded-full font-semibold">
 						Message Client
 					</button>
-				</div>
+				</div>-->
 	
 			</aside>
 	

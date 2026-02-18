@@ -74,7 +74,6 @@
 			<!-- HEADER -->
 			<header class="border-b border-slate-800 px-6 py-4 flex justify-between items-center">
 				<h1 class="text-xl font-semibold text-white">Dashboard</h1>
-				<button class="btn-primary">Post a Job</button>
 			</header>
 	
 			<!-- CONTENT -->
@@ -100,7 +99,7 @@
 					</div>
 				</section>
 	
-				<!-- ACTIVE JOBS -->
+				<!-- ACTIVE JOBS 
 				<section class="bg-[#020617] border border-slate-800 rounded-2xl p-6">
 					<h2 class="text-lg font-semibold text-white mb-4">
 						Active Job Posts
@@ -133,9 +132,9 @@
 						</div>
 	
 					</div>
-				</section>
+				</section>-->
 	
-				<!-- RECENT PROPOSALS -->
+				<!-- RECENT PROPOSALS
 				<section class="bg-[#020617] border border-slate-800 rounded-2xl p-6">
 					<h2 class="text-lg font-semibold text-white mb-4">
 						Recent Proposals
@@ -168,7 +167,7 @@
 						</div>
 	
 					</div>
-				</section>
+				</section> -->
 	
 			</div>
 		</main>

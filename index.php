@@ -57,7 +57,7 @@
 						development, marketing, and more.
 					</p>
 	
-					<div class="flex gap-4 mt-6">
+					<!--<div class="flex gap-4 mt-6">
 						<a href="find-talent.php" class="bg-green-500 hover:bg-green-600 text-[#052E16]
 							font-semibold px-6 py-3 rounded-full">
 							Find Talent
@@ -65,7 +65,7 @@
 						<a href="find-work.php" class="border border-slate-700 px-6 py-3 rounded-full">
 							Find Work
 						</a>
-					</div>
+					</div>-->
 	
 					<div class="flex gap-6 mt-8 text-sm text-slate-400">
 						<span>✔ Trusted by startups</span>

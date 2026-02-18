@@ -6,7 +6,7 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
-		<title>Dashboard | Workzo</title>
+		<title>Dashboard | Freelancer</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<script src="https://cdn.tailwindcss.com"></script>
 		<style>
@@ -87,7 +87,7 @@
 					</div>
 				</div>
 	
-				<!-- ACTIVE JOBS -->
+				<!-- ACTIVE JOBS
 				<div class="bg-[#020617] border border-slate-800 rounded-2xl p-6">
 					<h3 class="text-lg font-semibold text-white mb-4">Active Jobs</h3>
 	
@@ -116,9 +116,9 @@
 							<span class="status">In Review</span>
 						</div>
 					</div>
-				</div>
+				</div> -->
 	
-				<!-- RECENT ACTIVITY -->
+				<!-- RECENT ACTIVITY 
 				<div class="bg-[#020617] border border-slate-800 rounded-2xl p-6">
 					<h3 class="text-lg font-semibold text-white mb-4">Recent Activity</h3>
 	
@@ -127,7 +127,7 @@
 						<li>💰 Payment received <span class="text-green-400">₹15,000</span></li>
 						<li>⭐ Client left a 5-star review</li>
 					</ul>
-				</div>
+				</div>-->
 	
 			</div>
 	
