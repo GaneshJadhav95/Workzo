@@ -55,12 +55,16 @@
 				padding: 0.6rem 1rem;
 				border-radius: 1rem;
 				font-size: .9rem;
+				width: fit-content;
 			}
+			
 			.message.received {
 				background: #020617;
 				border: 1px solid #334155;
+				color: #e2e8f0;
 				align-self: flex-start;
 			}
+			
 			.message.sent {
 				background: #22C55E;
 				color: #052E16;
@@ -134,10 +138,10 @@
 				</div>
 	
 				<!-- MESSAGES -->
-				<div id="me_box" class="flex-1 p-6 space-y-4 overflow-y-auto"></div>
+				<div id="me_box" class="flex flex-col p-6 space-y-4 h-[79%] overflow-y-auto"></div>
 	
 				<!-- INPUT -->
-				<div class="border-t fixed bottom-0 w-[62.5%] border-slate-800 p-4 flex gap-2">
+				<div class="border-t border-slate-800 p-4 flex gap-2">
 					<input type="text" data-sender="<?php echo $fetch['id'];?>" id="message" class="chat-input" placeholder="Type a message...">
 				</div>
 	
@@ -193,18 +197,12 @@
 				}
 			}
 			
-			//function startPolling() { 
-			//	setInterval(send, 1000);
-			//	console.log("ok")
-			//}
-			
 			document.getElementById("message").addEventListener("keydown", function (event) {
 				if (event.key === "Enter") {
 					let sender = this.dataset.sender;
 					send(sender);
 				}
 			});	
-			//startPolling();
 		</script>
 	</body>
 </html>
