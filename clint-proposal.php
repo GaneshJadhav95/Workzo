@@ -7,6 +7,7 @@
 		header("Location: index.php");
 	}
 	$e = $_SESSION['client'];
+	$client_id = $_SESSION['client_id'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -62,7 +63,7 @@
 				font-size: .85rem;
 			}
 		</style>
-				<script>
+		<script>
 			async function m(btn){
 				try{
 					let reciver_id = btn.dataset.reciver;
@@ -147,41 +148,46 @@
 						echo "false";
 					}else{	
 						$data = json_decode($result)->data;
+						$data2 = json_decode($result)->check;
+						$ids = array_column($data2, 'reciever_id');
+						
+						foreach($data as $d){
 				?>
 				<div class="proposal-card">
 					<div class="flex items-start gap-4">
-						<img src="public/assets/freelancer/<?php echo $data->profile_p; ?>" class="w-14 h-14 rounded-full">
+						<img src="public/assets/freelancer/<?php echo $d->profile_p;?>" class="w-14 h-14 rounded-full">
 						<div>
-							<h3 class="font-semibold text-white"><?php echo $data->name; ?></h3>
+							<h3 class="font-semibold text-white">
+								<?php echo $d->name;?>
+							</h3>
 							<p class="text-sm text-slate-400">
-								<?php echo $data->skills; ?> ⭐
+								<?php echo $d->skills;?>⭐
 							</p>
 							<p class="text-sm mt-2 text-slate-300 line-clamp-3">
-								<?php echo $data->about; ?>
+								<?php echo $d->about;?>
 							</p>
 						</div>
 					</div>
 	
 					<div class="flex items-center gap-4 mt-4 md:mt-0">
-						<!--<p class="font-semibold text-green-400">₹65,000</p>
-						<button class="btn-outline-sm"><a href="user-profile.php">Profile</a></button>-->
 						<?php
-							$sql1 = mysqli_query($conn, "SELECT * FROM `client` WHERE `email` = '$e'");
-							$r = mysqli_fetch_assoc($sql1);
-							$id = $r['id'];
-							$sql = mysqli_query($conn, "SELECT * FROM `messages` WHERE `sender_id` = '$id'");
-							if(mysqli_num_rows($sql) > 0){
+							//if(in_array($d->id, $data2)){
+							
+							if (in_array($d->id, $ids)) {
 						?>
-							<button id="ab<?php echo $data->id;?>" class="btn-primary-sm">Sent</button>
+							<button id="ab<?php echo $d->id;?>;?>" class="btn-primary-sm">Sent</button>
 						<?php
 							}else{
 						?>
-							<button id="ab<?php echo $data->id;?>" class="btn-primary-sm" data-reciver="<?php echo $data->id; ?>" onclick="m(this)">Message</button>
+							<button id="ab<?php echo $d->id;?>" class="btn-primary-sm" data-reciver="<?php echo $d->id;?>" onclick="m(this)">Message</button>
 						<?php
 							}
 						?>
 					</div>
 				</div>
+				<?php
+					}
+				?>
 			</div>
 			<?php
 				}

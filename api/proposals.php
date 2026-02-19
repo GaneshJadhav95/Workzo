@@ -15,17 +15,37 @@
 		);
 		exit;
 	}
-	//$email = $_SESSION['client'];
 	
-	$sql1 = mysqli_query($conn, "SELECT * FROM `proposals`");
-	$r = mysqli_fetch_assoc($sql1);
-	$id = $r['freelancer_id'];
-	$sql = mysqli_query($conn, "SELECT * FROM `freelancer` WHERE `id` = '$id'");
-	$data = mysqli_fetch_assoc($sql);
+	$email = $_SESSION['client'];
+	$client_id = $_SESSION['client_id'];
+	//$sql1 = mysqli_query($conn, "SELECT * FROM `proposals`");
+	//$r = mysqli_fetch_assoc($sql1);
+	//$id = $r['freelancer_id'];
+	//$sql = mysqli_query($conn, "SELECT freelancer.* FROM freelancer LEFT JOIN proposals ON freelancer.id = proposals.freelancer_id");
+	$sql = mysqli_query($conn, "SELECT 
+									proposals.freelancer_id,
+									proposals.job_id,
+									freelancer.name,
+									freelancer.id,
+									freelancer.profile_p,
+									freelancer.skills,
+									freelancer.about
+								FROM proposals
+								JOIN freelancer
+									ON proposals.freelancer_id = freelancer.id
+								JOIN jobs
+									ON proposals.job_id = jobs.id
+								WHERE jobs.email = '$email'
+								");
+	$data = mysqli_fetch_all($sql, MYSQLI_ASSOC);
+	$check = mysqli_query($conn, "SELECT DISTINCT(reciever_id) FROM `messages` WHERE `sender_id` = '$client_id'");
+	$data2 = mysqli_fetch_all($check, MYSQLI_ASSOC);
+	
 	if($sql){
 		echo json_encode([
 			"status" => "success",
-			"data" => $data
+			"data" => $data,
+			"check" => $data2
 		]);
 	}
 	exit;
