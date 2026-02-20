@@ -5,11 +5,8 @@
 	
 	if(!isset($_SESSION['freelancer'])){
 		header("Location: index.php");
-	}
-	
-	$email = $_SESSION['freelancer'];
-	$sql = mysqli_query($conn, "SELECT * FROM `freelancer` WHERE `email` = '$email'");
-	$fetch = mysqli_fetch_assoc($sql);
+	} 
+	$id = $_SESSION['freelancer_id'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -108,10 +105,19 @@
 	
 				<div class="divide-y divide-slate-800">
 					<?php					
-						$user = mysqli_query($conn, "SELECT DISTINCT client.id, client.*, messages.sender_id, messages.message_id FROM `client` LEFT JOIN messages ON client.id = messages.sender_id AND client.id WHERE client.id = messages.sender_id");
+						$user = mysqli_query($conn, "SELECT DISTINCT 
+															messages.message_id,
+															client.id,
+															client.name,
+															client.profile_p
+														FROM messages
+														JOIN client 
+															ON messages.sender_id = client.id
+														WHERE messages.reciever_id = '$id'
+													");
+						
 						if(mysqli_num_rows($user) > 0){
 							while($row = mysqli_fetch_assoc($user)){
-						//print_r($row);
 					?>
 						<button onclick="show1(<?php echo $row['message_id'];?>), setInterval(ajit2, 1000);" data-show="<?php echo $row['message_id'];?>" class="conversation active w-full">
 							<img src="public/assets/client/<?php echo $row['profile_p'];?>" class="avatar">
@@ -142,7 +148,7 @@
 	
 				<!-- INPUT -->
 				<div class="border-t border-slate-800 p-4 flex gap-2">
-					<input type="text" data-sender="<?php echo $fetch['id'];?>" id="message" class="chat-input" placeholder="Type a message...">
+					<input type="text" data-sender="<?php echo $id;?>" id="message" class="chat-input" placeholder="Type a message...">
 				</div>
 	
 			</div>

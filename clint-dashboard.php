@@ -1,5 +1,10 @@
 <?php
 	require_once('core/layout/layout.php');
+	session_start();
+	
+	if(!isset($_SESSION['client'])){
+		header("Location: index.php");
+	}
 ?>
 <!DOCTYPE html>
 <html lang="en">

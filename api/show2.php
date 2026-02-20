@@ -18,10 +18,10 @@
 	if(isset($data['show'])){
 		$show = $data['show'];
 		
-		$sql = mysqli_query($conn, "SELECT * FROM `freelancer`");
+		$sql = mysqli_query($conn, "SELECT `name`,`profile_p` FROM `freelancer`");
 		$data = mysqli_fetch_assoc($sql);
 		
-		$message = mysqli_query($conn, "SELECT * FROM `messages` WHERE `message_id` = '$show' ORDER BY created_at");
+		$message = mysqli_query($conn, "SELECT `message`, `sender_type` FROM `messages` WHERE `message_id` = '$show' ORDER BY created_at");
 		$data2 = mysqli_fetch_all($message, MYSQLI_ASSOC);
 		
 		if($sql){

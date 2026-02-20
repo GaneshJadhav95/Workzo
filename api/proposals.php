@@ -18,10 +18,7 @@
 	
 	$email = $_SESSION['client'];
 	$client_id = $_SESSION['client_id'];
-	//$sql1 = mysqli_query($conn, "SELECT * FROM `proposals`");
-	//$r = mysqli_fetch_assoc($sql1);
-	//$id = $r['freelancer_id'];
-	//$sql = mysqli_query($conn, "SELECT freelancer.* FROM freelancer LEFT JOIN proposals ON freelancer.id = proposals.freelancer_id");
+	
 	$sql = mysqli_query($conn, "SELECT 
 									proposals.freelancer_id,
 									proposals.job_id,

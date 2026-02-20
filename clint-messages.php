@@ -8,8 +8,7 @@
 	}	
 	
 	$email = $_SESSION['client'];
-	$sql = mysqli_query($conn, "SELECT * FROM `client` WHERE `email` = '$email'");
-	$fetch = mysqli_fetch_assoc($sql);
+	$c_id = $_SESSION['client_id'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -107,8 +106,15 @@
 				</div>
 	
 				<div class="divide-y divide-slate-800">
-					<?php					
-						$user = mysqli_query($conn, "SELECT DISTINCT freelancer.id, freelancer.*, messages.reciever_id, messages.message_id FROM `freelancer` LEFT JOIN messages ON freelancer.id = messages.reciever_id AND freelancer.id WHERE freelancer.id = messages.reciever_id");
+					<?php											
+						$user = mysqli_query($conn, "SELECT DISTINCT 
+															messages.message_id,
+															freelancer.id,
+															freelancer.name,
+															freelancer.profile_p
+														FROM messages
+														JOIN freelancer ON messages.reciever_id = freelancer.id
+														WHERE messages.sender_id = '$c_id'");
 						if(mysqli_num_rows($user) > 0){
 							while($row = mysqli_fetch_assoc($user)){
 					?>
@@ -141,7 +147,7 @@
 	
 				<!-- INPUT -->
 				<div class="border-t border-slate-800 p-4 flex gap-2">
-					<input type="text" data-sender="<?php echo $fetch['id'];?>" class="chat-input" id="message" placeholder="Type a message...">
+					<input type="text" data-sender="<?php echo $c_id;?>" class="chat-input" id="message" placeholder="Type a message...">
 				</div>
 	
 			</div>

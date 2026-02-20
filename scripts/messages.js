@@ -21,7 +21,6 @@ async function show1(btn) {
 			
 			const meBox = document.getElementById("me_box");
 			meBox.innerHTML = ""; 
-			console.log(result);
 
 			for (let i = 0; i < result.message.length; i++) {
 				const message = result.message?.[i]?.message ?? "";
