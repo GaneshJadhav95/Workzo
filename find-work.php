@@ -54,11 +54,13 @@
 	<body class="bg-[#0F172A] text-slate-200 min-h-screen">
 	
 		<!-- NAVBAR -->
-		<?php nav(); ?>
-	
+		<?php navsearch(); ?>
+		
+		<div class=" px-6 py-8 grid lg:grid-cols-4">
+			<div id="print2"></div>
+		</div>
 		<!-- MAIN -->
 		<div class="max-w-7xl mx-auto px-6 py-8 grid lg:grid-cols-4 gap-8">
-	
 			<!-- FILTERS -->
 			<aside class="space-y-6">
 	

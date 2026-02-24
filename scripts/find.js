@@ -46,6 +46,40 @@ async function submit(){
 	}
 }
 
+let a = [];
+async function search(){
+	try{
+		let input = document.getElementById("input").value;
+		const url = await fetch(`api/jobs_search.php`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				input : input
+			})
+		});
+		
+		const data = await url.text();
+		console.log(data);
+		a.push(data);
+		document.getElementById("print2").innerHTML = data;
+	}catch(error){
+		console.log(error);
+	}
+}
+
+document.getElementById("input").addEventListener("keydown", function (event) {
+	let key = event.key;
+	
+	if(key.match(/^[a-z ]$/)){
+		search();
+	} if(key === "Backspace"){
+		a.pop();
+		document.getElementById("print2").innerHTML = a;
+	}
+});
+
 function jobcard(data) {
 	const ajit = (!data.job_id)
 		? `<button id="ab${data.id}" data-job="${data.id}" onclick="apply(this)" class="btn-apply">Apply Now</button>`
@@ -109,3 +143,37 @@ async function apply(btn){
 		console.log(error);
 	}
 }
+
+let b = [];
+async function search2(){
+	try{
+		let input = document.getElementById("input").value;
+		const url = await fetch(`api/find-talent.php`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				input : input
+			})
+		});
+		
+		const data = await url.text();
+		console.log(data);
+		b.push(data);
+		document.getElementById("print3").innerHTML = data;
+	}catch(error){
+		console.log(error);
+	}
+}
+
+document.getElementById("input").addEventListener("keydown", function (event) {
+	let key = event.key;
+	
+	if(key.match(/^[a-z ]$/)){
+		search2();
+	} if(key === "Backspace"){
+		b.pop();
+		document.getElementById("print3").innerHTML = b;
+	}
+});

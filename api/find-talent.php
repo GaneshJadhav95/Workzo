@@ -16,40 +16,52 @@
 	}
 	$email = $_SESSION['client'];
 	
-	if(isset($data['job_type']) && isset($data['experience'])){
-		$job_type = $data['job_type'];
-		$experience = $data['experience'];
-		
-		$where = "1=1 ";
-		if(!empty($job_type)){
-			$ajit = "'". implode("','", $job_type) . "'";
-			$where .= " AND `job_type` IN ($ajit)";
-		}
-		
-		if(!empty($experience)){
-			$ganesh = "'". implode("','", $experience) . "'";
-			$where .= " AND `experience` IN ($ganesh)";
-		}
-		
-		$sql = mysqli_query($conn, "SELECT * FROM `freelancer` WHERE $where");
-		//$sql = mysqli_query($conn, "SELECT freelancer.*, proposals.job_id FROM `jobs` LEFT JOIN proposals ON ((SELECT id FROM freelancer WHERE email = '$email') = proposals.freelancer_id AND jobs.id = proposals.job_id) WHERE $where");
-		/*
+	if(isset($data['input'])){
+		$input = $data['input'];
+		$sql = mysqli_query($conn, "SELECT * FROM `freelancer` WHERE `name` LIKE '%$input%'");
 		if(mysqli_num_rows($sql) > 0){
-			
-			
 			while($row = mysqli_fetch_assoc($sql)){
-				$data[] = $row;
+?>
+				<div class="freelancer-card mt-5">
+					<img src="public/assets/freelancer/<?php echo $row['profile_p'];?>"
+						class="w-20 h-20 rounded-full border-2 border-green-500">
+	
+					<div class="flex-1">
+						<div class="flex justify-between">
+							<div>
+								<h3 class="text-white font-semibold">
+									<?php echo $row['name'];?>
+								</h3>
+								<p class="text-sm text-slate-400">
+									<?php echo $row['skills'];?>
+								</p>
+							</div>
+							<p class="font-semibold text-white">₹<?php echo $row['h_rate'];?> / hr</p>
+						</div>
+	
+						<div class="flex gap-3 text-xs text-slate-400 mt-2">
+							<span>⭐ 4.9</span>
+							<span>•</span>
+							<span>100% Job Success</span>
+							<span>•</span>
+							<span><?php echo $row['country'];?></span>
+						</div>
+	
+						<p class="text-sm text-slate-400 mt-3">
+							<?php echo $row['about'];?>
+						</p>
+	
+						<div class="flex flex-wrap gap-2 mt-3">
+							<span class="skill"><?php echo $row['skills'];?></span>
+						</div>
+	
+						<div class="flex gap-4 mt-4">
+							<button class="btn-primary"><a href="get.php?id=<?php echo $row['id']; ?>">View Profile</a></button>
+						</div>
+					</div>
+				</div>
+<?php
 			}
 		}
-		*/
-		$data = mysqli_fetch_all($sql, MYSQLI_ASSOC);
-		
-		echo json_encode(
-			[
-				"status" => "success",
-				"data" => $data
-			]
-		);
-		exit;
 	}
 ?>

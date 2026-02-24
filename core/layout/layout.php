@@ -14,10 +14,109 @@
 				<a href="find-work.php" class="hover:text-white transition">Find Work</a>
 			</div>
 	
-			<!-- SEARCH -->
+			<!-- SEARCH 
 			<div class="hidden lg:block">
 				<input type="text"
 					placeholder="Search jobs or freelancers"
+					class="bg-[#020617] border border-slate-700 rounded-full
+					px-5 py-2 text-sm w-80 text-slate-200
+					focus:outline-none focus:ring-2 focus:ring-green-500">
+			</div>-->
+	
+			<!-- RIGHT ACTIONS -->
+			<div class="flex items-center gap-4 relative">
+	
+				<!-- PROFILE DROPDOWN -->
+				<div class="relative group">
+					<img src="public/assets/freelancer/<?php echo $_SESSION['profile'];?>"
+						class="w-9 h-9 rounded-full border border-slate-700 cursor-pointer">
+	
+					<!-- DROPDOWN -->
+					<div class="hidden md:hidden absolute right-0 mt-3 w-48 bg-[#020617]
+						border border-slate-800 rounded-xl shadow-xl
+						opacity-0 invisible group-hover:opacity-100 group-hover:visible
+						transition-all duration-200">
+	
+						<a href="user-profile.php"
+							class="block px-4 py-3 text-sm text-slate-300 hover:bg-slate-800 hover:text-white">
+							Profile
+						</a>
+	
+						<a href="dashboard.php"
+							class="block px-4 py-3 text-sm text-slate-300 hover:bg-slate-800 hover:text-white">
+							Dashboard
+						</a>
+	
+						<hr class="border-slate-800">
+	
+						<a href="logout.php"
+							class="block px-4 py-3 text-sm text-red-400 hover:bg-slate-800">
+							Logout
+						</a>
+					</div>
+				</div>
+	
+				<!-- MOBILE MENU BUTTON -->
+				<button class="md:hidden text-slate-300 focus:outline-none" onclick="toggleMenu()">
+					<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"
+						viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round"
+							d="M4 6h16M4 12h16M4 18h16" />
+					</svg>
+				</button>
+	
+			</div>
+		</div>
+	
+		<!-- MOBILE MENU -->
+		<div id="mobileMenu" class="hidden md:hidden bg-[#020617] border-t border-slate-800">
+			<div class="px-6 py-4 space-y-4 text-slate-300 text-sm">
+				<div class="px-6 py-4 space-y-4 text-slate-300 text-sm">
+					<a href="find-work.php" class="block hover:text-white">Find Work</a>
+				</div>
+				<div class="px-6 py-4 space-y-4 text-slate-300 text-sm">
+					<a href="user-profile.php" class="block hover:text-white">Profile</a>
+				</div>
+				<div class="px-6 py-4 space-y-4 text-slate-300 text-sm">
+					<a href="dashboard.php" class="block hover:text-white">Dashboard</a>
+				</div>
+				<div class="px-6 py-4 space-y-4 text-slate-300 text-sm">
+					<a href="logout.php" class="block text-red-400 hover:text-white">Logout</a>
+				</div>
+			</div>
+		</div>
+	</nav>
+	
+	<script>
+		function toggleMenu() {
+			document.getElementById("mobileMenu").classList.toggle("hidden");
+		}
+	</script>
+
+<?php
+	}
+?>
+
+<?php
+	function navsearch(){
+?>
+	<nav class="bg-[#0F172A] border-b border-slate-800 sticky top-0 z-50">
+		<div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+	
+			<!-- LOGO -->
+			<a href="index.php" class="text-2xl font-bold text-white tracking-wide">
+				Workzo
+			</a>
+	
+			<!-- DESKTOP LINKS -->
+			<div class="hidden md:flex items-center gap-8 text-sm text-slate-300">
+				<a href="find-work.php" class="hover:text-white transition">Find Work</a>
+			</div>
+	
+			<!-- SEARCH -->
+			<div class="hidden lg:block">
+				<input type="text" id="input"
+					placeholder="Search jobs"
 					class="bg-[#020617] border border-slate-700 rounded-full
 					px-5 py-2 text-sm w-80 text-slate-200
 					focus:outline-none focus:ring-2 focus:ring-green-500">
@@ -32,7 +131,7 @@
 						class="w-9 h-9 rounded-full border border-slate-700 cursor-pointer">
 	
 					<!-- DROPDOWN -->
-					<div class="absolute right-0 mt-3 w-48 bg-[#020617]
+					<div class="hidden lg:block absolute right-0 mt-3 w-48 bg-[#020617]
 						border border-slate-800 rounded-xl shadow-xl
 						opacity-0 invisible group-hover:opacity-100 group-hover:visible
 						transition-all duration-200">
@@ -72,8 +171,15 @@
 		<div id="mobileMenu" class="hidden md:hidden bg-[#020617] border-t border-slate-800">
 			<div class="px-6 py-4 space-y-4 text-slate-300 text-sm">
 				<a href="find-work.php" class="block hover:text-white">Find Work</a>
-				<a href="find-talent.php" class="block hover:text-white">Find Freelancers</a>
-				<a href="about.php" class="block hover:text-white">About Us</a>
+			</div>
+			<div class="px-6 py-4 space-y-4 text-slate-300 text-sm">
+				<a href="user-profile.php" class="block hover:text-white">Profile</a>
+			</div>
+			<div class="px-6 py-4 space-y-4 text-slate-300 text-sm">
+				<a href="dashboard.php" class="block hover:text-white">Dashboard</a>
+			</div>
+			<div class="px-6 py-4 space-y-4 text-slate-300 text-sm">
+				<a href="logout.php" class="block text-red-400 hover:text-white">Logout</a>
 			</div>
 		</div>
 	</nav>
@@ -122,26 +228,26 @@
 						class="w-9 h-9 rounded-full border border-slate-700 cursor-pointer">
 				</div>
 	
-				<!-- MOBILE MENU BUTTON -->
+				<!-- MOBILE MENU BUTTON 
 				<button class="md:hidden text-slate-300 focus:outline-none" onclick="toggleMenu()">
 					<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"
 						viewBox="0 0 24 24">
 						<path stroke-linecap="round" stroke-linejoin="round"
 							d="M4 6h16M4 12h16M4 18h16" />
 					</svg>
-				</button>
+				</button>-->
 	
 			</div>
 		</div>
 	
-		<!-- MOBILE MENU -->
+		<!-- MOBILE MENU 
 		<div id="mobileMenu" class="hidden md:hidden bg-[#020617] border-t border-slate-800">
 			<div class="px-6 py-4 space-y-4 text-slate-300 text-sm">
 				<a href="find-work.php" class="block hover:text-white">Find Work</a>
 				<a href="find-talent.php" class="block hover:text-white">Find Freelancers</a>
 				<a href="about.php" class="block hover:text-white">About Us</a>
 			</div>
-		</div>
+		</div>-->
 	</nav>
 	
 	<script>
@@ -170,10 +276,101 @@
 				<a href="find-talent.php" class="hover:text-white transition">Find Freelancers</a>
 			</div>
 	
-			<!-- SEARCH -->
+			<!-- SEARCH 
 			<div class="hidden lg:block">
 				<input type="text"
 					placeholder="Search jobs or freelancers"
+					class="bg-[#020617] border border-slate-700 rounded-full
+					px-5 py-2 text-sm w-80 text-slate-200
+					focus:outline-none focus:ring-2 focus:ring-green-500">
+			</div>-->
+	
+			<!-- RIGHT ACTIONS -->
+			<div class="flex items-center gap-4 relative">
+	
+				<!-- PROFILE DROPDOWN -->
+				<div class="relative group">
+					<img src="public/assets/client/<?php echo $_SESSION['c_profile']; ?>"
+						class="w-9 h-9 rounded-full border border-slate-700 cursor-pointer">
+	
+					<!-- DROPDOWN -->
+					<div class="hidden lg:block absolute right-0 mt-3 w-48 bg-[#020617]
+						border border-slate-800 rounded-xl shadow-xl
+						opacity-0 invisible group-hover:opacity-100 group-hover:visible
+						transition-all duration-200">
+	
+						<a href="clint-profile.php"
+							class="block px-4 py-3 text-sm text-slate-300 hover:bg-slate-800 hover:text-white">
+							Profile
+						</a>
+	
+						<a href="clint-dashboard.php"
+							class="block px-4 py-3 text-sm text-slate-300 hover:bg-slate-800 hover:text-white">
+							Dashboard
+						</a>
+	
+						<hr class="border-slate-800">
+	
+						<a href="client-logout.php"
+							class="block px-4 py-3 text-sm text-red-400 hover:bg-slate-800">
+							Logout
+						</a>
+					</div>
+				</div>
+	
+				<!-- MOBILE MENU BUTTON -->
+				<button class="md:hidden text-slate-300 focus:outline-none" onclick="toggleMenu()">
+					<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"
+						viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round"
+							d="M4 6h16M4 12h16M4 18h16" />
+					</svg>
+				</button>
+	
+			</div>
+		</div>
+	
+		<!-- MOBILE MENU -->
+		<div id="mobileMenu" class="hidden md:hidden bg-[#020617] border-t border-slate-800">
+			<div class="px-6 py-4 space-y-4 text-slate-300 text-sm">
+				<a href="find-talent.php" class="block hover:text-white">Find Freelancers</a>
+				<a href="client-dashboard.php" class="block hover:text-white">Dashboard</a>
+				<a href="client-profile.php" class="block hover:text-white">Profile</a>
+				<a href="client-logout.php" class="block text-red-400 hover:text-white">Logout</a>
+			</div>
+		</div>
+	</nav>
+	
+	<script>
+		function toggleMenu() {
+			document.getElementById("mobileMenu").classList.toggle("hidden");
+		}
+	</script>
+
+<?php
+	}
+?>
+
+<?php
+	function clintsearch(){
+?>
+	<nav class="bg-[#0F172A] border-b border-slate-800 sticky top-0 z-50">
+		<div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+	
+			<!-- LOGO -->
+			<a href="index.php" class="text-2xl font-bold text-white tracking-wide">
+				Workzo
+			</a>
+	
+			<!-- DESKTOP LINKS -->
+			<div class="hidden md:flex items-center gap-8 text-sm text-slate-300">
+				<a href="find-talent.php" class="hover:text-white transition">Find Freelancers</a>
+			</div>
+	
+			<!-- SEARCH -->
+			<div class="hidden lg:block">
+				<input type="text" id="input"
+					placeholder="Search freelancers"
 					class="bg-[#020617] border border-slate-700 rounded-full
 					px-5 py-2 text-sm w-80 text-slate-200
 					focus:outline-none focus:ring-2 focus:ring-green-500">
@@ -188,7 +385,7 @@
 						class="w-9 h-9 rounded-full border border-slate-700 cursor-pointer">
 	
 					<!-- DROPDOWN -->
-					<div class="absolute right-0 mt-3 w-48 bg-[#020617]
+					<div class="hidden lg:block absolute right-0 mt-3 w-48 bg-[#020617]
 						border border-slate-800 rounded-xl shadow-xl
 						opacity-0 invisible group-hover:opacity-100 group-hover:visible
 						transition-all duration-200">
@@ -228,7 +425,9 @@
 		<div id="mobileMenu" class="hidden md:hidden bg-[#020617] border-t border-slate-800">
 			<div class="px-6 py-4 space-y-4 text-slate-300 text-sm">
 				<a href="find-talent.php" class="block hover:text-white">Find Freelancers</a>
-				<a href="about.php" class="block hover:text-white">About Us</a>
+				<a href="client-dashboard.php" class="block hover:text-white">Dashboard</a>
+				<a href="client-profile.php" class="block hover:text-white">Profile</a>
+				<a href="client-logout.php" class="block text-red-400 hover:text-white">Logout</a>
 			</div>
 		</div>
 	</nav>
