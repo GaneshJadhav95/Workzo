@@ -1,5 +1,5 @@
 <?php
-	require_once('core/layout/layout.php');
+	require_once'core/layout/layout.php';
 	require_once"authorization/config.php";
 	session_start();
 	

@@ -1,0 +1,19 @@
+<?php	
+	require_once"../authorization/config.php";
+	session_start();
+	if(isset($_POST['email']) && isset($_POST['password'])){
+		$email = $_POST['email'];
+		$password = $_POST['password'];
+		$check = mysqli_query($conn, "SELECT id FROM `admin` WHERE `email` = '$email' AND `password` = '$password'");
+		$st = mysqli_fetch_assoc($check);
+		if(mysqli_num_rows($check) > 0){
+			$_SESSION['admin'] = $st['id'];
+			header("Location: ../admin/dashboard.php");
+		}else{
+			echo "<script>
+				alert('Try Again');
+				window.location.href = '../admin/login.php';
+			</script>";
+		}
+	}
+?>
