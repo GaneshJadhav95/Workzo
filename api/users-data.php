@@ -25,5 +25,25 @@
 			$sql = mysqli_query($this->conn, "SELECT * FROM `client` WHERE `name` LIKE '%$input%'");
 			return mysqli_fetch_all($sql, MYSQLI_ASSOC);
 		}
+		
+		public function freelancer_count(){
+			$sql = mysqli_query($this->conn, "SELECT COUNT(*) AS count FROM `freelancer`");
+			return mysqli_fetch_assoc($sql);
+		}
+		
+		public function client_count(){
+			$sql = mysqli_query($this->conn, "SELECT COUNT(*) AS count FROM `client`");
+			return mysqli_fetch_assoc($sql);		
+		}
+		
+		public function active(){
+			$sql = mysqli_query($this->conn, "SELECT COUNT(DISTINCT `users`) AS count, `url` FROM `active_users`");
+			return mysqli_fetch_assoc($sql);
+		}
+		
+		public function url(){
+			$sql = mysqli_query($this->conn, "SELECT DISTINCT url FROM `active_users`");
+			return mysqli_fetch_all($sql, MYSQLI_ASSOC);
+		}
 	}
 ?>
