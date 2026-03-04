@@ -8,6 +8,8 @@
 	}
 	$e = $_SESSION['client'];
 	$client_id = $_SESSION['client_id'];
+
+	
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -105,13 +107,12 @@
 	
 		<!-- MAIN -->
 		<main class="flex-1">
-	
 			<!-- HEADER -->
 			<header class="border-b border-slate-800 px-6 py-4">
 				<h1 class="text-xl font-semibold text-white">Proposals</h1>
 			</header>
 	
-			<!-- JOB INFO -->
+			<!-- JOB INFO 
 			
 			<section class="px-6 py-4 border-b border-slate-800">
 				<h2 class="text-lg font-semibold text-white">
@@ -120,7 +121,7 @@
 				<p class="text-sm text-slate-400">
 					8 proposals • Budget ₹50,000 – ₹80,000
 				</p>
-			</section>
+			</section>-->
 	
 			<!-- PROPOSALS LIST -->
 			<div class="p-6 max-w-full space-y-6">
@@ -170,12 +171,10 @@
 					</div>
 	
 					<div class="flex items-center gap-4 mt-4 md:mt-0">
-						<?php
-							//if(in_array($d->id, $data2)){
-							
+						<?php							
 							if (in_array($d->id, $ids)) {
 						?>
-							<button id="ab<?php echo $d->id;?>;?>" class="btn-primary-sm">Sent</button>
+							<button id="ab<?php echo $d->id;?>" class="btn-primary-sm">Sent</button>
 						<?php
 							}else{
 						?>

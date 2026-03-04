@@ -7,6 +7,7 @@
 		header("Location: index.php");
 	} 
 	$id = $_SESSION['freelancer_id'];
+	$cl = 0;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -102,9 +103,9 @@
 				<div class="p-4 border-b border-slate-800 font-semibold">
 					Conversations
 				</div>
-	
+
 				<div class="divide-y divide-slate-800">
-					<?php					
+					<?php		
 						$user = mysqli_query($conn, "SELECT DISTINCT 
 															messages.message_id,
 															client.id,
@@ -118,6 +119,7 @@
 						
 						if(mysqli_num_rows($user) > 0){
 							while($row = mysqli_fetch_assoc($user)){
+								$cl += $row['id'];
 					?>
 						<button onclick="show1(<?php echo $row['message_id'];?>), setInterval(ajit2, 1000);" data-show="<?php echo $row['message_id'];?>" class="conversation active w-full">
 							<img src="public/assets/client/<?php echo $row['profile_p'];?>" class="avatar">
@@ -134,7 +136,6 @@
 	
 			<!-- CHAT WINDOW -->
 			<div class="flex flex-col flex-1 hidden" id="sh">
-	
 				<!-- CHAT HEADER -->
 				<div class="border-b border-slate-800 p-4 flex items-center gap-3">
 					<img id="im" src="" class="w-10 h-10 rounded-full">
@@ -148,7 +149,7 @@
 	
 				<!-- INPUT -->
 				<div class="border-t border-slate-800 p-4 flex gap-2">
-					<input type="text" data-sender="<?php echo $id;?>" id="message" class="chat-input" placeholder="Type a message...">
+					<input type="text" data-sender="<?php echo $cl;?>" id="message" class="chat-input" placeholder="Type a message...">
 				</div>
 	
 			</div>

@@ -9,6 +9,7 @@
 	
 	$email = $_SESSION['client'];
 	$c_id = $_SESSION['client_id'];
+	$fr = 0;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -117,6 +118,7 @@
 														WHERE messages.sender_id = '$c_id'");
 						if(mysqli_num_rows($user) > 0){
 							while($row = mysqli_fetch_assoc($user)){
+								$fr += $row['id'];
 					?>
 						<button onclick="show2(<?php echo $row['message_id'];?>), setInterval(ajit, 1000);" data-show="<?php echo $row['message_id'];?>" class="conversation active w-full">
 							<img src="public/assets/freelancer/<?php echo $row['profile_p'];?>" class="avatar">
@@ -147,7 +149,7 @@
 	
 				<!-- INPUT -->
 				<div class="border-t border-slate-800 p-4 flex gap-2">
-					<input type="text" data-sender="<?php echo $c_id;?>" class="chat-input" id="message" placeholder="Type a message...">
+					<input type="text" data-sender="<?php echo $fr;?>" class="chat-input" id="message" placeholder="Type a message...">
 				</div>
 	
 			</div>

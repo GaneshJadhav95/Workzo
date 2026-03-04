@@ -1,31 +1,26 @@
 <?php
 	require_once"../authorization/config.php";
 	session_start();
-	header('Comtent-Type: application/json');
+	header('Content-Type: application/json');
 	$json_input = file_get_contents('php://input');
 	$data = json_decode($json_input, true);
 	
-	if(!isset($_SESSION['freelancer']) || !isset($_SESSION['client'])){
+	if(!isset($_SESSION['client'])){
 		echo json_encode(
 			[
 				"status" => "error",
-				"message" => "Session Error"
+				"message" => "Session Error3"
 			]
 		);
 		exit;
 	}
 		
-	$client = $_SESSION['client'];
-	$freelancer = $_SESSION['freelancer'];
 	
 	if(isset($data['reciver_id']) && isset($data['message']) && isset($data['type'])){
-		$sender = $data['reciver_id'];
+		$reciever = $data['reciver_id'];
 		$message = $data['message'];
 		$type = $data['type'];
-		
-		$re = mysqli_query($conn, "SELECT * FROM `freelancer` WHERE `email` = '$freelancer'");
-		$d = mysqli_fetch_assoc($re);
-		$reciever = $d['id'];
+		$sender = $_SESSION['client_id'];
 		
 		$message_id = $sender . $reciever;
 		if($message === ""){

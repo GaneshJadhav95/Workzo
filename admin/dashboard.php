@@ -40,6 +40,7 @@
 					<a href="dashboard.php" class="block py-2 px-4 rounded bg-gray-800 hover:bg-gray-700 transition">Dashboard</a>
 					<a href="freelancer.php" class="block py-2 px-4 rounded hover:bg-gray-800 transition">Freelancer</a>
 					<a href="clients.php" class="block py-2 px-4 rounded hover:bg-gray-800 transition">Clients</a>
+					<a href="logout.php" class="block py-2 px-4 rounded text-red-400 hover:bg-gray-800 transition">Logout</a>
 				</nav>
 			</aside>
 			

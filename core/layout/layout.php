@@ -16,8 +16,8 @@
 	
 			<!-- SEARCH 
 			<div class="hidden lg:block">
-				<input type="text"
-					placeholder="Search jobs or freelancers"
+				<input type="text" id="input"
+					placeholder="Search jobs"
 					class="bg-[#020617] border border-slate-700 rounded-full
 					px-5 py-2 text-sm w-80 text-slate-200
 					focus:outline-none focus:ring-2 focus:ring-green-500">
@@ -32,7 +32,7 @@
 						class="w-9 h-9 rounded-full border border-slate-700 cursor-pointer">
 	
 					<!-- DROPDOWN -->
-					<div class="hidden md:hidden absolute right-0 mt-3 w-48 bg-[#020617]
+					<div class="hidden lg:block absolute right-0 mt-3 w-48 bg-[#020617]
 						border border-slate-800 rounded-xl shadow-xl
 						opacity-0 invisible group-hover:opacity-100 group-hover:visible
 						transition-all duration-200">
@@ -71,18 +71,16 @@
 		<!-- MOBILE MENU -->
 		<div id="mobileMenu" class="hidden md:hidden bg-[#020617] border-t border-slate-800">
 			<div class="px-6 py-4 space-y-4 text-slate-300 text-sm">
-				<div class="px-6 py-4 space-y-4 text-slate-300 text-sm">
-					<a href="find-work.php" class="block hover:text-white">Find Work</a>
-				</div>
-				<div class="px-6 py-4 space-y-4 text-slate-300 text-sm">
-					<a href="user-profile.php" class="block hover:text-white">Profile</a>
-				</div>
-				<div class="px-6 py-4 space-y-4 text-slate-300 text-sm">
-					<a href="dashboard.php" class="block hover:text-white">Dashboard</a>
-				</div>
-				<div class="px-6 py-4 space-y-4 text-slate-300 text-sm">
-					<a href="logout.php" class="block text-red-400 hover:text-white">Logout</a>
-				</div>
+				<a href="find-work.php" class="block hover:text-white">Find Work</a>
+			</div>
+			<div class="px-6 py-4 space-y-4 text-slate-300 text-sm">
+				<a href="user-profile.php" class="block hover:text-white">Profile</a>
+			</div>
+			<div class="px-6 py-4 space-y-4 text-slate-300 text-sm">
+				<a href="dashboard.php" class="block hover:text-white">Dashboard</a>
+			</div>
+			<div class="px-6 py-4 space-y-4 text-slate-300 text-sm">
+				<a href="logout.php" class="block text-red-400 hover:text-white">Logout</a>
 			</div>
 		</div>
 	</nav>
