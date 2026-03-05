@@ -598,9 +598,9 @@
 			<a href="clint-setting.php" class="nav-link block px-4 py-2 rounded hover:bg-slate-700 hover:text-white text-slate-300">Settings</a>
 			</nav>
 		
-			<div class="p-4 border-t border-slate-800 text-sm text-slate-400">
+			<button class="p-4 border-t border-slate-800 text-red-400 text-sm font-bold">
 				<a href="client-logout.php">Logout</a>
-			</div>
+			</button>
 		</aside>
 		
 		<!-- Main content -->
