@@ -19,7 +19,7 @@
 			$check = mysqli_query($conn, "SELECT * FROM `freelancer` WHERE `email` = '$email' || `contact` = '$contact'");
 	
 			$uploadDir = "../public/assets/freelancer/";
-			$allowedTypes = ["jpg", "jpeg", "png", "gif", "pdf", "txt"];
+			$allowedTypes = ["jpg", "jpeg", "png"];
 			$maxSize = 2 * 1024 * 1024; // 2 MB
 	
 			$fileName = basename($_FILES["profile_p"]["name"]);

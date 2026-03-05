@@ -224,28 +224,38 @@
 				<div class="relative group">
 					<img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
 						class="w-9 h-9 rounded-full border border-slate-700 cursor-pointer">
-				</div>
 	
-				<!-- MOBILE MENU BUTTON 
+					<!-- DROPDOWN -->
+					<div class="hidden lg:block absolute right-0 mt-3 w-48 bg-[#020617]
+						border border-slate-800 rounded-xl shadow-xl
+						opacity-0 invisible group-hover:opacity-100 group-hover:visible
+						transition-all duration-200">
+	
+						<a href="welcomepage.php"
+							class="block px-4 py-3 text-sm text-slate-300 hover:bg-slate-800 hover:text-white">
+							Login
+						</a>
+					</div>
+				</div>
+
+				<!-- MOBILE MENU BUTTON -->
 				<button class="md:hidden text-slate-300 focus:outline-none" onclick="toggleMenu()">
 					<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"
 						viewBox="0 0 24 24">
 						<path stroke-linecap="round" stroke-linejoin="round"
 							d="M4 6h16M4 12h16M4 18h16" />
 					</svg>
-				</button>-->
+				</button>
 	
 			</div>
 		</div>
 	
-		<!-- MOBILE MENU 
+		<!-- MOBILE MENU -->
 		<div id="mobileMenu" class="hidden md:hidden bg-[#020617] border-t border-slate-800">
 			<div class="px-6 py-4 space-y-4 text-slate-300 text-sm">
-				<a href="find-work.php" class="block hover:text-white">Find Work</a>
-				<a href="find-talent.php" class="block hover:text-white">Find Freelancers</a>
-				<a href="about.php" class="block hover:text-white">About Us</a>
+				<a href="welcomepage.php" class="block hover:text-white">Login</a>
 			</div>
-		</div>-->
+		</div>
 	</nav>
 	
 	<script>
@@ -583,12 +593,13 @@
 			<a href="job-post.php" class="nav-link block px-4 py-2 rounded hover:bg-slate-700 hover:text-white text-slate-300">Post a Job</a>
 			<a href="myjobs.php" class="nav-link block px-4 py-2 rounded hover:bg-slate-700 hover:text-white text-slate-300">My Jobs</a>
 			<a href="clint-proposal.php" class="nav-link block px-4 py-2 rounded hover:bg-slate-700 hover:text-white text-slate-300">Proposals</a>
+			<a href="clint-profile.php" class="nav-link block px-4 py-2 rounded hover:bg-slate-700 hover:text-white text-slate-300">Profile</a>
 			<a href="clint-messages.php" class="nav-link block px-4 py-2 rounded hover:bg-slate-700 hover:text-white text-slate-300">Messages</a>
 			<a href="clint-setting.php" class="nav-link block px-4 py-2 rounded hover:bg-slate-700 hover:text-white text-slate-300">Settings</a>
 			</nav>
 		
 			<div class="p-4 border-t border-slate-800 text-sm text-slate-400">
-				<a href="clint-profile.php"> Client Account</a>
+				<a href="client-logout.php">Logout</a>
 			</div>
 		</aside>
 		

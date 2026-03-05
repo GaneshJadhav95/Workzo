@@ -120,7 +120,7 @@
 							while($row = mysqli_fetch_assoc($user)){
 								$fr += $row['id'];
 					?>
-						<button onclick="show2(<?php echo $row['message_id'];?>), setInterval(ajit, 1000);" data-show="<?php echo $row['message_id'];?>" class="conversation active w-full">
+						<button onclick="show2(<?php echo $row['message_id'];?>, <?php echo $row['id'];?>), setInterval(ajit, 1000);" data-show="<?php echo $row['message_id'];?>" class="conversation active w-full">
 							<img src="public/assets/freelancer/<?php echo $row['profile_p'];?>" class="avatar">
 							<div>
 								<p class="font-medium text-white"><?php echo $row['name'];?></p>

@@ -9,16 +9,18 @@
 		echo json_encode(
 			[
 				"status" => "error",
-				"message" => "Session Error"
+				"message" => "Session Error123"
 			]
 		);
 		exit;
 	}
-		
-	if(isset($data['show'])){
+	
+	
+	if(isset($data['show']) && isset($data['id'])){
 		$show = $data['show'];
+		$id = $data['id'];
 		
-		$sql = mysqli_query($conn, "SELECT `name`,`profile_p` FROM `freelancer`");
+		$sql = mysqli_query($conn, "SELECT `name`,`profile_p` FROM `freelancer` WHERE `id` = '$id'");
 		$data = mysqli_fetch_assoc($sql);
 		
 		$message = mysqli_query($conn, "SELECT `message`, `sender_type` FROM `messages` WHERE `message_id` = '$show' ORDER BY created_at");
@@ -28,9 +30,8 @@
 			echo json_encode([
 				"status" => "success",
 				"data" => $data,
-				"message" => $data2,
+				"message" => $data2
 			]);
 		}
-		exit;
 	}
 ?>
