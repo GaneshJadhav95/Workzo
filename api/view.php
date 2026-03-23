@@ -18,8 +18,9 @@
 	$email = $_SESSION['client'];
 	
 	if(isset($data['job_id'])){
-		$job_id = $data['job_id'];
-		
+		$job_id = validation_number($data['job_id']);
+		$job_id = esc($conn, $job_id);
+
 		$sql = mysqli_query($conn, "SELECT * FROM `jobs` WHERE `id` = '$job_id'");
 		$row = mysqli_fetch_assoc($sql);
 		if($sql){
@@ -33,7 +34,7 @@
 			echo json_encode(
 				[
 					"status" => "unsuccess",
-					"data" => "Data Not Fount"
+					"data" => "Data Not Found"
 				]
 			);
 		}

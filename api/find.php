@@ -17,8 +17,10 @@
 	$email = $_SESSION['freelancer'];
 	
 	if(isset($data['job_type']) && isset($data['experience'])){
-		$job_type = $data['job_type'];
-		$experience = $data['experience'];
+		$job_type = validation($data['job_type']);
+		$job_type = esc($conn, $job_type);
+		$experience = validation($data['experience']);
+		$experience = esc($conn, $experience);
 		
 		$where = "1=1 ";
 		if(!empty($job_type)){
@@ -31,17 +33,8 @@
 			$where .= " AND `experience` IN ($ganesh)";
 		}
 		
-		//$sql = mysqli_query($conn, "SELECT * FROM `jobs` WHERE $where");
 		$sql = mysqli_query($conn, "SELECT jobs.*, proposals.job_id FROM `jobs` LEFT JOIN proposals ON ((SELECT id FROM freelancer WHERE email = '$email') = proposals.freelancer_id AND jobs.id = proposals.job_id) WHERE $where");
-		/*
-		if(mysqli_num_rows($sql) > 0){
-			
-			
-			while($row = mysqli_fetch_assoc($sql)){
-				$data[] = $row;
-			}
-		}
-		*/
+
 		$data = mysqli_fetch_all($sql, MYSQLI_ASSOC);
 		
 		echo json_encode(

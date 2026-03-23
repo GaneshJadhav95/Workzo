@@ -18,7 +18,9 @@
 	$email = $_SESSION['freelancer'];
 	
 	if(isset($data['input'])){
-		$input = $data['input'];
+		$input = validation($data['input']);
+		$input = esc($conn, $input);
+
 		$sql = mysqli_query($conn, "SELECT jobs.*, proposals.job_id FROM `jobs` LEFT JOIN proposals ON ((SELECT id FROM freelancer WHERE email = '$email') = proposals.freelancer_id AND jobs.id = proposals.job_id) WHERE jobs.title LIKE '%$input%'");
 		if(mysqli_num_rows($sql) > 0){
 			while($row = mysqli_fetch_assoc($sql)){

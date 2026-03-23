@@ -16,8 +16,11 @@
 		exit;
 	}
 	
-	$email = $_SESSION['client'];
-	$client_id = $_SESSION['client_id'];
+	$email = validation_email($_SESSION['client']);
+	$client_id = validation_number($_SESSION['client_id']);
+
+	$email = esc($conn, $email);
+	$client_id = esc($conn, $client_id);
 	
 	$sql = mysqli_query($conn, "SELECT 
 									proposals.freelancer_id,

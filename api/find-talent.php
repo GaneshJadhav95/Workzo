@@ -17,7 +17,8 @@
 	$email = $_SESSION['client'];
 	
 	if(isset($data['input'])){
-		$input = $data['input'];
+		$input = validation($data['input']);
+		$input = esc($conn, $input);
 		$sql = mysqli_query($conn, "SELECT * FROM `freelancer` WHERE `name` LIKE '%$input%'");
 		if(mysqli_num_rows($sql) > 0){
 			while($row = mysqli_fetch_assoc($sql)){

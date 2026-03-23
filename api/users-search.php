@@ -5,7 +5,8 @@
 	$data = json_decode($json_input, true);
 	
 	if(isset($data['input'])){
-		$input = $data['input'];
+		$input = validation($data['input']);
+		$input = esc($conn, $input);
 		$sql = new Users($conn);
 		$data = $sql->search_freelancer($input);
 		echo json_encode([
@@ -14,7 +15,8 @@
 	}
 	
 	if(isset($data['input2'])){
-		$input = $data['input2'];
+		$input = validation($data['input2']);
+		$input = esc($conn, $input);
 		$sql = new Users($conn);
 		$data = $sql->search_client($input);
 		echo json_encode([

@@ -17,12 +17,16 @@
 	
 	
 	if(isset($data['reciver_id']) && isset($data['message']) && isset($data['type'])){
-		$reciever = $data['reciver_id'];
-		$message = $data['message'];
-		$type = $data['type'];
+		$reciever = validation_number($data['reciver_id']); 
+		$message = validation($data['message']);
+		$type = validation($data['type']);
+		$sender = validation_number($_SESSION['freelancer_id']);
 		
-		$sender = $_SESSION['freelancer_id'];
-		
+		$reciever = esc($conn, $reciever);
+		$message = esc($conn, $message);
+		$type = esc($conn, $type);
+		$sender = esc($conn, $sender);
+
 		$message_id = $reciever . $sender;
 				
 		if($message === ""){

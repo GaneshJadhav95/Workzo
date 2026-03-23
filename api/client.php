@@ -3,17 +3,28 @@
 	
 	if ($_SERVER["REQUEST_METHOD"] === "POST") {
 		if(isset($_POST['name']) && isset($_POST['email']) && isset($_POST['contact']) && isset($_FILES['profile_p']) && isset($_POST['password']) && isset($_POST['city']) && isset($_POST['state']) && isset($_POST['country']) && isset($_POST['company']) && isset($_POST['about']) && isset($_POST['servises'])){
-			$name = $_POST['name'];
-			$email = $_POST['email'];
-			$contact = $_POST['contact'];
-			$password = $_POST['password'];
-			$city = $_POST['city'];
-			$state = $_POST['state'];
-			$country = $_POST['country'];
-			$company = $_POST['company'];
-			$about = $_POST['about'];
-			$servises = $_POST['servises'];
-	
+			$name = validation($_POST['name']);
+			$email = validation_email($_POST['email']);
+			$contact = validation_number($_POST['contact']);
+			$password = validation($_POST['password']);
+			$city = validation($_POST['city']);
+			$state = validation($_POST['state']);
+			$country = validation($_POST['country']);
+			$company = validation($_POST['company']);
+			$about = validation($_POST['about']);
+			$servises = validation($_POST['servises']);
+
+			$name = esc($conn, $name);
+			$email = esc($conn, $email);
+			$contact = esc($conn, $contact);
+			$password = esc($conn, $password);
+			$city = esc($conn, $city);
+			$state = esc($conn, $state);
+			$country = esc($conn, $country);
+			$company = esc($conn, $company);
+			$about = esc($conn, $about);
+			$servises = esc($conn, $servises);
+
 			$check = mysqli_query($conn, "SELECT * FROM `client` WHERE `email` = '$email' || `contact` = '$contact'");
 	
 			$uploadDir = "../public/assets/client/";

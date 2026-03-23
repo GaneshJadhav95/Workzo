@@ -18,8 +18,9 @@
 	$email = $_SESSION['freelancer'];
 	
 	if(isset($data['job_id'])){
-		$job_id = $data['job_id'];
-		
+		$job_id = validation_number($data['job_id']);
+		$job_id = esc($conn, $job_id);
+
 		$sql = mysqli_query($conn, "SELECT * FROM `freelancer` WHERE `email` = '$email'");
 		$row = mysqli_fetch_assoc($sql);
 		$f_id = $row['id'];

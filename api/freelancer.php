@@ -1,21 +1,34 @@
 <?php	
 	require_once"../authorization/config.php";
-	
+
 	if ($_SERVER["REQUEST_METHOD"] === "POST") {
 		if(isset($_POST['name']) && isset($_POST['email']) && isset($_POST['contact']) && isset($_FILES['profile_p']) && isset($_POST['password']) && isset($_POST['city']) && isset($_POST['state']) && isset($_POST['country']) && isset($_POST['education']) && isset($_POST['college']) && isset($_POST['skills']) && isset($_POST['about']) && isset($_POST['rate'])){
-			$name = $_POST['name'];
-			$email = $_POST['email'];
-			$contact = $_POST['contact'];
-			$password = $_POST['password'];
-			$city = $_POST['city'];
-			$state = $_POST['state'];
-			$country = $_POST['country'];
-			$education = $_POST['education'];
-			$college = $_POST['college'];
-			$skills = $_POST['skills'];
-			$about = $_POST['about'];
-			$h_rate = $_POST['rate'];
-	
+			$name = validation($_POST['name']);
+			$email = validation_email($_POST['email']);
+			$contact = validation_number($_POST['contact']);
+			$password = validation($_POST['password']);
+			$city = validation($_POST['city']);
+			$state = validation($_POST['state']);
+			$country = validation($_POST['country']);
+			$education = validation($_POST['education']);
+			$college = validation($_POST['college']);
+			$skills = validation($_POST['skills']);
+			$about = validation($_POST['about']);
+			$h_rate = validation_number($_POST['rate']);
+
+			$name = esc($conn, $name);
+			$email = esc($conn, $email);
+			$contact = esc($conn, $contact);
+			$password = esc($conn, $password);
+			$city = esc($conn, $city);
+			$state = esc($conn, $state);
+			$country = esc($conn, $country);
+			$education = esc($conn, $education);
+			$college = esc($conn, $college);
+			$skills = esc($conn, $skills);
+			$about = esc($conn, $about);
+			$h_rate = esc($conn, $h_rate);
+
 			$check = mysqli_query($conn, "SELECT * FROM `freelancer` WHERE `email` = '$email' || `contact` = '$contact'");
 	
 			$uploadDir = "../public/assets/freelancer/";

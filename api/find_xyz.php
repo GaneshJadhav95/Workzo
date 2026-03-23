@@ -16,13 +16,20 @@
 	}
 	
 	if(isset($data['h']) && isset($data['price']) && isset($data['en']) && isset($data['inte']) && isset($data['ex'])){
-		$h = $data['h'];
-		$price = $data['price'];
-		$en = $data['en'];
-		$inte = $data['inte'];
-		$ex = $data['ex'];
-		$job_type = $data['job_type'];
-		
+		$h = validation($data['h']);
+		$price = validation_number($data['price']);
+		$en = validation($data['en']);
+		$inte = validation($data['inte']);
+		$ex = validation($data['ex']);
+		$job_type = validation($data['job_type']);
+
+		$h = esc($conn, $h);
+		$price = esc($conn, $price);
+		$en = esc($conn, $en);
+		$inte = esc($conn, $inte);
+		$ex = esc($conn, $ex);
+		$job_type = esc($conn, $job_type);
+
 		if(!empty($job_type)){
 			
 		}

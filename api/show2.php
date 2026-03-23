@@ -17,9 +17,12 @@
 	
 	
 	if(isset($data['show']) && isset($data['id'])){
-		$show = $data['show'];
-		$id = $data['id'];
+		$show = validation_number($data['show']);
+		$id = validation_number($data['id']);
 		
+		$show = esc($conn, $show);
+		$id = esc($conn, $id);
+
 		$sql = mysqli_query($conn, "SELECT `name`,`profile_p` FROM `freelancer` WHERE `id` = '$id'");
 		$data = mysqli_fetch_assoc($sql);
 		
