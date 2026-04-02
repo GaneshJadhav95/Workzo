@@ -130,7 +130,7 @@
 					
 					$cookie_string = session_name() . '=' . $session_id;
 					
-					$url = "http://localhost:8000/project/workzo/api/proposals.php";
+					$url = "http://localhost:8000/workzo/api/proposals.php";
 					
 					$ch = curl_init(); 
 					
@@ -163,6 +163,9 @@
 							</h3>
 							<p class="text-sm text-slate-400">
 								<?php echo $d->skills;?>⭐
+							</p>
+							<p class="text-sm text-slate-400">
+								<b>Job	Title : </b> <?php echo $d->title;?>⭐
 							</p>
 							<p class="text-sm mt-2 text-slate-300 line-clamp-3">
 								<?php echo $d->about;?>

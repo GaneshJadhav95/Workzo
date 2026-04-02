@@ -72,7 +72,7 @@
 					
 						$cookie_string = session_name() . '=' . $session_id;
 						
-						$url = "http://localhost:8000/project/workzo/api/count.php";
+						$url = "http://localhost:8000/workzo/api/count.php";
 						
 						$ch = curl_init(); 
 						

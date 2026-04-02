@@ -23,11 +23,19 @@
 		$show = esc($conn, $show);
 		$id = esc($conn, $id);
 
-		$sql = mysqli_query($conn, "SELECT `name`,`profile_p` FROM `freelancer` WHERE `id` = '$id'");
-		$data = mysqli_fetch_assoc($sql);
+		//$sql = mysqli_query($conn, "SELECT `name`,`profile_p` FROM `freelancer` WHERE `id` = '$id'");
+		$sql = $conn->prepare("SELECT `name`,`profile_p` FROM `freelancer` WHERE `id` = ?");
+		$sql->bind_param("i", $id);
+		$sql->execute();
+		$result = $sql->get_result();
+		$data = $result->fetch_assoc();
 		
-		$message = mysqli_query($conn, "SELECT `message`, `sender_type` FROM `messages` WHERE `message_id` = '$show' ORDER BY created_at");
-		$data2 = mysqli_fetch_all($message, MYSQLI_ASSOC);
+		//$message = mysqli_query($conn, "SELECT `message`, `sender_type` FROM `messages` WHERE `message_id` = '$show' ORDER BY created_at");
+		$message = $conn->prepare("SELECT `message`, `sender_type` FROM `messages` WHERE `message_id` = ? ORDER BY created_at");
+		$message->bind_param("i", $show);
+		$message->execute();
+		$result2 = $message->get_result();
+		$data2 = $result2->fetch_all(MYSQLI_ASSOC);
 		
 		if($sql){
 			echo json_encode([
@@ -36,5 +44,12 @@
 				"message" => $data2
 			]);
 		}
+	}else{
+		echo json_encode(
+			[
+				"status" => "error",
+				"message" => "Invalid Input"
+			]
+		);
 	}
 ?>

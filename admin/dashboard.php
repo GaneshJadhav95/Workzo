@@ -12,7 +12,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Tailwind CSS Admin Dashboard</title>
+		<title>Admin Dashboard</title>
 		<script src="https://cdn.tailwindcss.com"></script>
 		<style>
 			/* Hide scrollbars */
@@ -50,17 +50,6 @@
 				<!-- Header -->
 				<header class="bg-gray-900 p-4 flex justify-between items-center">
 					<h1 class="text-xl md:text-2xl font-bold">Dashboard Overview</h1>
-					<div class="flex items-center gap-4">
-						<button class="bg-gray-700 px-3 py-1 rounded transition hover:bg-gray-600">🌙</button>
-						<div class="relative">
-							<button class="bg-gray-700 px-3 py-1 rounded transition hover:bg-gray-600">🔔</button>
-							<div class="hidden absolute right-0 mt-2 w-64 bg-gray-800 rounded shadow-lg p-4 text-sm">
-								<p class="mb-2">New user registered</p>
-								<p class="mb-2">Order #123 completed</p>
-								<p>Server updated successfully</p>
-							</div>
-						</div>
-					</div>
 				</header>
 			
 				<!-- Dashboard Main -->
@@ -72,7 +61,7 @@
 					
 						$cookie_string = session_name() . '=' . $session_id;
 						
-						$url = "http://localhost:8000/project/workzo/api/count.php";
+						$url = "http://localhost:8000/workzo/api/count.php";
 						
 						$ch = curl_init(); 
 						

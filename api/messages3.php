@@ -20,12 +20,11 @@
 		$reciever = validation_number($data['reciver_id']);
 		$message = validation($data['message']);
 		$type = validation($data['type']);
-		$sender = validation_number($_SESSION['client_id']);
+		$sender = $_SESSION['client_id'];
 		
 		$reciever = esc($conn, $reciever);
 		$message = esc($conn, $message);
 		$type = esc($conn, $type);
-		$sender = esc($conn, $sender);
 
 		$message_id = $sender . $reciever;
 		if($message === ""){
@@ -34,12 +33,18 @@
 				"message" => "sorry"
 			]);
 		}else{
-			$sql = mysqli_query($conn, "INSERT INTO `messages`(`sender_id`, `reciever_id`, `message_id`, `message`, `sender_type`) VALUES('$sender', '$reciever', '$message_id', '$message', '$type')");
-		
+			//$sql = mysqli_query($conn, "INSERT INTO `messages`(`sender_id`, `reciever_id`, `message_id`, `message`, `sender_type`) VALUES('$sender', '$reciever', '$message_id', '$message', '$type')");
+			$sql = $conn->prepare("INSERT INTO `messages`(`sender_id`, `reciever_id`, `message_id`, `message`, `sender_type`) VALUES(?, ?, ?, ?, ?)");
+			$sql->bind_param("iiiss", $sender, $reciever, $message_id, $message, $type);
+			$sql->execute();
+			
 			if($sql){
-				$message = mysqli_query($conn, "SELECT * FROM `messages` WHERE `message_id` = '$message_id' ORDER BY created_at");
-				$data = mysqli_fetch_all($message, MYSQLI_ASSOC);
-				
+				//$message = mysqli_query($conn, "SELECT * FROM `messages` WHERE `message_id` = '$message_id' ORDER BY created_at");
+				$message = $conn->prepare("SELECT * FROM `messages` WHERE `message_id` = ? ORDER BY created_at");
+				$message->bind_param("i", $message_id);
+				$message->execute();
+				$a = $message->get_result();
+				$data = $a->fetch_all(MYSQLI_ASSOC);
 				echo json_encode([
 					"status" => "success",
 					"message" => $data

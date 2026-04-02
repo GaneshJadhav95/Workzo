@@ -25,7 +25,10 @@
 		$contact = esc($conn, $contact);
 		$skills = esc($conn, $skills);
 		
-		$sql = mysqli_query($conn, "UPDATE `freelancer` SET `name` = '$name', `email` = '$email', `contact` = '$contact', `skills` = '$skills' WHERE `email` = '$email1'");
+		$sql = $conn->prepare("UPDATE `freelancer` SET `name` = ?, `email` = ?, `contact` = ?, `skills` = ? WHERE `email` = ?");
+		$sql->bind_param("ssiss", $name, $email, $contact, $skills, $email1);
+		$sql->execute();
+		$sql->get_result();
 		if($sql){
 			echo json_encode(
 				[
@@ -41,5 +44,12 @@
 				]
 			);
 		}
+	}else{
+		echo json_encode(
+			[
+				"status" => "error",
+				"message" => "Invalid Input"
+			]
+		);
 	}
 ?>

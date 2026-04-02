@@ -31,7 +31,10 @@
 		$level = esc($conn, $level);
 		$skills = esc($conn, $skills);
 
-		$sql = mysqli_query($conn, "INSERT INTO `jobs`(`title`, `email`, `detail`, `job_type`, `min_budget`, `max_budget`, `experience`, `skills`) VALUES('$title', '$email', '$about', '$type', '$min', '$max', '$level', '$skills')");
+		//$sql = mysqli_query($conn, "INSERT INTO `jobs`(`title`, `email`, `detail`, `job_type`, `min_budget`, `max_budget`, `experience`, `skills`) VALUES('$title', '$email', '$about', '$type', '$min', '$max', '$level', '$skills')");
+		$sql = $conn->prepare("INSERT INTO `jobs`(`title`, `email`, `detail`, `job_type`, `min_budget`, `max_budget`, `experience`, `skills`) VALUES(?,?,?,?,?,?,?,?)");
+		$sql->bind_param("ssssiiss", $title, $email, $about, $type, $min, $max, $level, $skills);
+		$sql->execute();
 		if($sql){
 			echo json_encode(
 				[
@@ -47,5 +50,12 @@
 				]
 			);
 		}
+	}else{
+		echo json_encode(
+			[
+				"status" => "error",
+				"message" => "Invalid Input"
+			]
+		);
 	}
 ?>

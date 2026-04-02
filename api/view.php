@@ -21,8 +21,12 @@
 		$job_id = validation_number($data['job_id']);
 		$job_id = esc($conn, $job_id);
 
-		$sql = mysqli_query($conn, "SELECT * FROM `jobs` WHERE `id` = '$job_id'");
-		$row = mysqli_fetch_assoc($sql);
+		//$sql = mysqli_query($conn, "SELECT * FROM `jobs` WHERE `id` = '$job_id'");
+		$sql = $conn->prepare("SELECT * FROM `jobs` WHERE `id` = ?");
+		$sql->bind_param("i", $job_id);
+		$sql->execute();
+		$result = $sql->get_result();
+		$row = $result->fetch_assoc();
 		if($sql){
 			echo json_encode(
 				[
@@ -38,5 +42,12 @@
 				]
 			);
 		}
+	}else{
+		echo json_encode(
+			[
+				"status" => "error",
+				"message" => "Invalid Input"
+			]
+		);
 	}
 ?>

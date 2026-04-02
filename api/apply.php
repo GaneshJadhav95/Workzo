@@ -21,19 +21,44 @@
 		$job_id = validation_number($data['job_id']);
 		$job_id = esc($conn, $job_id);
 
-		$sql = mysqli_query($conn, "SELECT * FROM `freelancer` WHERE `email` = '$email'");
-		$row = mysqli_fetch_assoc($sql);
-		$f_id = $row['id'];
-		
-		$ins = mysqli_query($conn, "INSERT INTO `proposals`(`freelancer_id`, `job_id`) VALUES('$f_id', '$job_id')");
-		if($ins){
-			echo json_encode([
-				"status" => "success"
-			]);
+		$sql = $conn->prepare("SELECT * FROM `freelancer` WHERE `email` = ?");
+		$sql->bind_param("s", $email);
+		$sql->execute();
+		$row1 = $sql->get_result();
+		$row = $row1->fetch_assoc();
+	
+		$f_id = validation_number($row['id']);
+		$f_id = esc($conn, $f_id);
+
+		$f = $conn->prepare("SELECT * FROM `jobs` WHERE `id` = ?");
+		$f->bind_param("i", $job_id);
+		$f->execute();
+		$a = $f->get_result();
+
+		if($a->num_rows > 0){
+			$ins = $conn->prepare("INSERT INTO `proposals`(`freelancer_id`, `job_id`) VALUES(?, ?)");
+			$ins->bind_param("ii", $f_id, $job_id);
+			$ins->execute();
+			
+			if($ins){
+				echo json_encode([
+					"status" => "success"
+				]);
+			}else{
+				echo json_encode([
+					"status" => "unsuccess"
+				]);
+			}
 		}else{
 			echo json_encode([
-				"status" => "unsuccess"
+				"status" => "error",
+				"message" => "User Not Found"
 			]);
 		}
+	}else{
+		echo json_encode([
+			"status" => "error",
+			"message" => "Invalid Input"
+		]);
 	}
 ?>

@@ -3,10 +3,10 @@
 	require_once'authorization/config.php';
 	session_start();
 	
-	$email = $_GET['id'];
+	$email = validation_number($_GET['id']);
+	$email = esc($conn, $email);
 	$sql = mysqli_query($conn, "SELECT * FROM `freelancer` WHERE `id` = '$email'");
 	$row = mysqli_fetch_assoc($sql);
-	$_SESSION['profile'] = $row['profile_p'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,10 +27,12 @@
 	</head>
 	
 	<body class="bg-[#0F172A] text-slate-200 min-h-screen">
-	
-		<!-- Navbar -->
-	
+		
 		<!-- Main -->
+		<?php
+			if(mysqli_num_rows($sql) > 0){
+				$_SESSION['profile'] = $row['profile_p'];
+		?>
 		<div class="max-w-7xl mx-auto px-6 py-8 grid lg:grid-cols-3 gap-8">
 	
 			<!-- LEFT CONTENT -->
@@ -141,5 +143,10 @@
 			</div>
 	
 		</div>
+		<?php
+			}else{
+				echo "Profile not found.";
+			}
+		?>
 	</body>
 </html>

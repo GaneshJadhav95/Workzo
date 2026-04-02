@@ -12,6 +12,13 @@
 		echo json_encode([
 			'data'=> $data
 		]);
+	}else{
+		echo json_encode(
+			[
+				"status" => "error",
+				"message" => "Invalid Input"
+			]
+		);
 	}
 	
 	if(isset($data['input2'])){
@@ -22,5 +29,12 @@
 		echo json_encode([
 			'data'=> $data
 		]);
+	}else{
+		echo json_encode(
+			[
+				"status" => "error",
+				"message" => "Invalid Input2"
+			]
+		);
 	}
 ?>

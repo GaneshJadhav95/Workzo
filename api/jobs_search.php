@@ -21,9 +21,13 @@
 		$input = validation($data['input']);
 		$input = esc($conn, $input);
 
-		$sql = mysqli_query($conn, "SELECT jobs.*, proposals.job_id FROM `jobs` LEFT JOIN proposals ON ((SELECT id FROM freelancer WHERE email = '$email') = proposals.freelancer_id AND jobs.id = proposals.job_id) WHERE jobs.title LIKE '%$input%'");
-		if(mysqli_num_rows($sql) > 0){
-			while($row = mysqli_fetch_assoc($sql)){
+		//$sql = mysqli_query($conn, "SELECT jobs.*, proposals.job_id FROM `jobs` LEFT JOIN proposals ON ((SELECT id FROM freelancer WHERE email = '$email') = proposals.freelancer_id AND jobs.id = proposals.job_id) WHERE jobs.title LIKE '%$input%'");
+		$sql = $conn->prepare("SELECT jobs.*, proposals.job_id FROM `jobs` LEFT JOIN proposals ON ((SELECT id FROM freelancer WHERE email = ?) = proposals.freelancer_id AND jobs.id = proposals.job_id) WHERE jobs.title LIKE '%$input%'");
+		$sql->bind_param("s", $email);
+		$sql->execute();
+		$result = $sql->get_result();
+		if($result->num_rows > 0){
+			while($row = $result->fetch_assoc()){
 ?>
 				<div class="job-card mt-5">
 					<div class="flex justify-between">
@@ -68,5 +72,12 @@
 <?php
 			}
 		}
+	}else{
+		echo json_encode(
+			[
+				"status" => "error",
+				"message" => "Invalid Input"
+			]
+		);
 	}
 ?>

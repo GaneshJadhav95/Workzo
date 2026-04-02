@@ -32,7 +32,11 @@
 		$level = esc($conn, $level);
 		$skills = esc($conn, $skills);
 
-		$sql = mysqli_query($conn, "UPDATE `jobs` SET `title`='$title', `detail`='$about',`job_type`='$type',`min_budget`='$min',`max_budget`='$max',`experience`='$level',`skills`='$skills' WHERE `email` = '$email' AND `id` = '$id'");
+		$sql = $conn->prepare("UPDATE `jobs` SET `title`= ?, `detail`= ?,`job_type`= ?,`min_budget`= ?,`max_budget`= ?,`experience`= ?,`skills`= ? WHERE `email` = ? AND `id` = ?");
+		$sql->bind_param("sssiisssi", $title, $about, $type, $min, $max, $level, $skills, $email, $id);
+		$sql->execute();
+		$sql->get_result();
+
 		if($sql){
 			echo json_encode(
 				[
@@ -48,5 +52,12 @@
 				]
 			);
 		}
+	}else{
+		echo json_encode(
+			[
+				"status" => "error",
+				"message" => "Invalid Input"
+			]
+		);
 	}
 ?>

@@ -29,10 +29,6 @@
 		$inte = esc($conn, $inte);
 		$ex = esc($conn, $ex);
 		$job_type = esc($conn, $job_type);
-
-		if(!empty($job_type)){
-			
-		}
 		
 		if($h){
 			$sql = mysqli_query($conn, "SELECT * FROM `jobs` WHERE `job_type` = '$h'");

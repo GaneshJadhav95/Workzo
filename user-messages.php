@@ -176,7 +176,6 @@
 					});
 			
 					const result = await response.json();
-			
 					if (result.status === "success") {
 						const meBox = document.getElementById("me_box");
 						meBox.innerHTML = "";

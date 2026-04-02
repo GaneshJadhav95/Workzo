@@ -16,15 +16,13 @@
 		exit;
 	}
 	
-	$email = validation_email($_SESSION['client']);
-	$client_id = validation_number($_SESSION['client_id']);
-
-	$email = esc($conn, $email);
-	$client_id = esc($conn, $client_id);
+	$email = $_SESSION['client'];
+	$client_id = $_SESSION['client_id'];
 	
-	$sql = mysqli_query($conn, "SELECT 
+	/*$sql = mysqli_query($conn, "SELECT 
 									proposals.freelancer_id,
 									proposals.job_id,
+									jobs.title,
 									freelancer.name,
 									freelancer.id,
 									freelancer.profile_p,
@@ -36,10 +34,34 @@
 								JOIN jobs
 									ON proposals.job_id = jobs.id
 								WHERE jobs.email = '$email'
+								");*/
+	$sql = $conn->prepare("SELECT 
+									proposals.freelancer_id,
+									proposals.job_id,
+									jobs.title,
+									freelancer.name,
+									freelancer.id,
+									freelancer.profile_p,
+									freelancer.skills,
+									freelancer.about
+								FROM proposals
+								JOIN freelancer
+									ON proposals.freelancer_id = freelancer.id
+								JOIN jobs
+									ON proposals.job_id = jobs.id
+								WHERE jobs.email = ?
 								");
-	$data = mysqli_fetch_all($sql, MYSQLI_ASSOC);
-	$check = mysqli_query($conn, "SELECT DISTINCT(reciever_id) FROM `messages` WHERE `sender_id` = '$client_id'");
-	$data2 = mysqli_fetch_all($check, MYSQLI_ASSOC);
+	$sql->bind_param("s", $email);
+	$sql->execute();
+	$result = $sql->get_result();
+	$data = $result->fetch_all(MYSQLI_ASSOC);
+
+	//$check = mysqli_query($conn, "SELECT DISTINCT(reciever_id) FROM `messages` WHERE `sender_id` = '$client_id'");
+	$check = $conn->prepare("SELECT DISTINCT(reciever_id) FROM `messages` WHERE `sender_id` = ?");
+	$check->bind_param("i", $client_id);
+	$check->execute();
+	$result2 = $check->get_result();
+	$data2 = $result2->fetch_all(MYSQLI_ASSOC);
 	
 	if($sql){
 		echo json_encode([

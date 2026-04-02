@@ -36,6 +36,7 @@
 					<a href="dashboard.php" class="block py-2 px-4 rounded bg-gray-800">Dashboard</a>
 					<a href="freelancer.php" class="block py-2 px-4 rounded hover:bg-gray-800">Freelancer</a>
 					<a href="clients.php" class="block py-2 px-4 rounded hover:bg-gray-800">Clients</a>
+					<a href="logout.php" class="block py-2 px-4 rounded text-red-400 hover:bg-gray-800 transition">Logout</a>
 				</nav>
 			</aside>
 		
@@ -82,7 +83,7 @@
 					
 									$cookie_string = session_name() . '=' . $session_id;
 									
-									$url = "http://localhost:8000/project/workzo/api/users-fetch.php";
+									$url = "http://localhost:8000/workzo/api/users-fetch.php";
 									
 									$ch = curl_init(); 
 									

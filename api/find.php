@@ -44,5 +44,13 @@
 			]
 		);
 		exit;
+	}else{
+		echo json_encode(
+			[
+				"status" => "error",
+				"message" => "Invalid Input"
+			]
+		);
+		exit;
 	}
 ?>

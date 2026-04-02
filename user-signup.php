@@ -56,8 +56,8 @@
 							<input type="file" name="profile_p" required hidden>
 						</label>
 	
-						<input minlength="6" required type="password" class="input" name="password" id="password" placeholder="Password">
-						<input minlength="6" required type="password" class="input" name="con-password" id="con_password" placeholder="Confirm Password">
+						<input minlength="8" required type="password" class="input" name="password" id="password" placeholder="Password">
+						<input minlength="8" required type="password" class="input" name="con-password" id="con_password" placeholder="Confirm Password">
 						<p class="mt-1 text-sm text-black-500 dark:text-gray-300" id="message"></p>
 						
 						<div class="md:col-span-2">

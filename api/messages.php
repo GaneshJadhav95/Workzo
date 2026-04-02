@@ -30,8 +30,10 @@
 		
 		$message_id = $sender . $reciever;
 		
-		$sql = mysqli_query($conn, "INSERT INTO `messages`(`sender_id`, `reciever_id`, `message_id`, `message`, `sender_type`) VALUES('$sender', '$reciever', '$message_id', '$message', '$type')");
-		
+		//$sql = mysqli_query($conn, "INSERT INTO `messages`(`sender_id`, `reciever_id`, `message_id`, `message`, `sender_type`) VALUES('$sender', '$reciever', '$message_id', '$message', '$type')");
+		$sql = $conn->prepare("INSERT INTO `messages`(`sender_id`, `reciever_id`, `message_id`, `message`, `sender_type`) VALUES(?, ?, ?, ?, ?)");
+		$sql->bind_param("iiiss", $sender, $reciever, $message_id, $message, $type);
+		$sql->execute();
 		if($sql){
 			echo json_encode([
 				"status" => "success",
@@ -39,5 +41,11 @@
 			]);
 		}
 		exit;
+	}else{
+		echo json_encode(
+			[
+				"status" => "error",
+				"message" => "Invalid Input"
+			]
+		);
 	}
-?>

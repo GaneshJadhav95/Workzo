@@ -6,14 +6,26 @@
 		$password = validation($_POST['password']);
 
 		$email = esc($conn, $email);
-		$password = esc($conn, $password);
 
-		$check = mysqli_query($conn, "SELECT * FROM `freelancer` WHERE `email` = '$email' AND `password` = '$password'");
-		$st = mysqli_fetch_assoc($check);
-		if(mysqli_num_rows($check) > 0){
-			$_SESSION['freelancer'] = $email;
-			$_SESSION['freelancer_id'] = $st['id'];
-			header("Location: ../user-profile.php");
+		//$check = mysqli_query($conn, "SELECT * FROM `freelancer` WHERE `email` = '$email' AND `password` = '$password'");
+		$check = $conn->prepare("SELECT id, password FROM `freelancer` WHERE `email` = ?");
+		$check->bind_param("s", $email);
+		$check->execute();
+		$a = $check->get_result();
+		
+		if($a->num_rows > 0){
+			$st = $a->fetch_assoc();
+
+			if(password_verify($password, $st["password"])){
+				$_SESSION['freelancer'] = $email;
+				$_SESSION['freelancer_id'] = $st['id'];
+				header("Location: ../user-profile.php");
+			}else{
+				echo "<script>
+					alert('Invalid Email or Password');
+					window.location.href = '../user-login.php';
+				</script>";
+			}
 		}else{
 			echo "<script>
 					alert('Try Again');
